@@ -41,7 +41,20 @@ namespace HumaneSociety
 
         public void AddAnimal()
         {
-
+            ui.GetAnimalName();
+            //GetInput - UI Class
+            ui.GetSpecies();
+            //GetInput - UI Class
+            ui.GetGender();
+            //GetInput - UI Class
+            ui.GetAge();
+            //GetInput - UI Class
+            ui.GetSize();
+            //GetInput - UI Class
+            ui.GetRoom();
+            //GetInput - UI Class
+            ui.GetPersonalityColor();
+            //GetInput - UI Class
         }
 
         public void SearchAnimal()
