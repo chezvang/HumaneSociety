@@ -17,13 +17,13 @@ namespace HumaneSociety
         }
         public void GetAnimalName()
         {
-            //validate for max character limit in DB
             Console.WriteLine("Please enter the name:");
+            //validate for max character limit in DB - METHOD
         }
         public void GetSpecies()
         {
-            //validate for max character limit in DB
             Console.WriteLine("Please enter the species:");
+            //validate for max character limit in DB - METHOD
         }
         public void GetGender()
         {
@@ -32,8 +32,8 @@ namespace HumaneSociety
         }
         public void GetAge()
         {
-            //validate for max character limit in DB
             Console.WriteLine("Please enter the age:");
+            //validate for max character limit in DB - METHOD
         }
         public void GetSize()
         {            
@@ -41,15 +41,16 @@ namespace HumaneSociety
             Console.WriteLine("[1] Extra Small \n[2] Small \n[3] Medium \n[4] Large \n[5] Extra Large");
         }
         public void GetRoom()
-        {
-            //needs a validater
+        {            
             Console.WriteLine("Room numbers have a maximum of three digits");
             Console.WriteLine("Please enter the room number:");
+            //needs a validater - METHOD
         }
         public void GetPersonalityColor()
         {
             Console.WriteLine("Please enter the personality color:");
             Console.WriteLine("[1] Purple \n[2] Orange \n[3] Green \n[4] Unrated/Pink");
+            //needs a validater - METHOD
         }
     }
 }
