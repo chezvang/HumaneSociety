@@ -8,33 +8,12 @@ namespace HumaneSociety
 {
     class UserInterface
     {
-        Adopter adopter = new Adopter();
-        Employee employee = new Employee();
-
-        public void InitialPrompt()
+        public void IncorrectInput()
         {
-            Console.WriteLine("Welcome to The Humane Society! \nChoose your path:\n [1] Employee\n [2] Adopter");
-            string option = Console.ReadLine();
-            InitialPromptOptions(option);
-        }
-
-        public void InitialPromptOptions(string option)
-        {
-            switch(option)
-            {
-                case "1":
-                    employee.EmployeeInitialPrompt();
-                    break;
-                case "2":
-                    adopter.AdopterInitialPrompt();
-                    break;
-                default:
-                    Console.WriteLine("Please enter [1] for Employee or [2] for Adopter\n Press any key to continue.");
-                    Console.ReadLine();
-                    Console.Clear();
-                    InitialPrompt();
-                    break;
-            }
+            Console.Clear();
+            Console.WriteLine("Incorrect input. Please enter the available options. Press any key to continue.");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }

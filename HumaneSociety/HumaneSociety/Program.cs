@@ -10,6 +10,9 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
+            //link to SQL database
+            //a way to import CSV file?
+
             HumaneSociety humane = new HumaneSociety();
 
             humane.StartProgram();

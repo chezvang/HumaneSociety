@@ -8,7 +8,8 @@ namespace HumaneSociety
 {
     class Adopter
     {
-        public void AdopterInitialPrompt()
+
+        public void AdopterMainMenu()
         {
             Console.WriteLine("Are you a new user?"); // y/n?
             Console.ReadLine();
