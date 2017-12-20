@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+    class Adopter
     {
-        static void Main(string[] args)
+        public void AdopterInitialPrompt()
         {
-            HumaneSociety humane = new HumaneSociety();
-
-            humane.StartProgram();
-
+            Console.WriteLine("Are you a new user?"); // y/n?
             Console.ReadLine();
         }
     }

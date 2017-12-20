@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Program
+    class Employee
     {
-        static void Main(string[] args)
+        public void EmployeeInitialPrompt()
         {
-            HumaneSociety humane = new HumaneSociety();
-
-            humane.StartProgram();
-
+            Console.WriteLine("This is currently blah");
             Console.ReadLine();
         }
     }
