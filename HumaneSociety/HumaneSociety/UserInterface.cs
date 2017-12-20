@@ -8,6 +8,36 @@ namespace HumaneSociety
 {
     class UserInterface
     {
+        public string GetUserInput(List<string> options)
+        {
+            string userInput;
+            Console.WriteLine("Please make a selection:");
+            userInput = Console.ReadLine();
+            return userInput;
+        }
+        public string GetUserInput()
+        {
+            string userInput;
+            Console.WriteLine("Please make a selection:");
+            userInput = Console.ReadLine();
+            return userInput;
+        }
+        private bool ValidateUserInput(List<string> options, string userInput)
+        {
+            if (options.Contains(userInput))
+            {
+                return true;
+            }
+            return false;            
+        }
+        private bool ValidateUserInput(string userInput, int maxCharacterLength)
+        {
+            if(userInput.Length < maxCharacterLength )
+            {
+                return true;
+            }
+            return false;
+        }
         public void IncorrectInput()
         {
             Console.Clear();
@@ -15,42 +45,114 @@ namespace HumaneSociety
             Console.ReadLine();
             Console.Clear();
         }
-        public void GetAnimalName()
+        public string GetAnimalName()
         {
+            string userInput;
+            int maxCharacterLength = 80;
+            bool isInputValid = false;
             Console.WriteLine("Please enter the name:");
-            //validate for max character limit in DB - METHOD
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetAnimalName();
+            }
+            return userInput;
         }
-        public void GetSpecies()
+        public string GetSpecies()
         {
+            string userInput;
+            int maxCharacterLength = 80;
+            bool isInputValid = false;
             Console.WriteLine("Please enter the species:");
-            //validate for max character limit in DB - METHOD
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetSpecies();
+            }
+            return userInput;
         }
-        public void GetGender()
+        public string GetGender()
         {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2" };
+            string userInput;
             Console.WriteLine("[1] Male \n[2] Female");
             Console.WriteLine("Please enter the gender:");
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetGender();
+            }
+            return userInput;
         }
-        public void GetAge()
+        public string GetAge()
         {
+            string userInput;
+            int maxCharacterLength = 5;
+            bool isInputValid = false;
             Console.WriteLine("Please enter the age:");
-            //validate for max character limit in DB - METHOD
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetAge();
+            }
+            return userInput;
         }
-        public void GetSize()
-        {            
+        public string GetSize()
+        {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2", "3", "4", "5" };
+            string userInput;       
             Console.WriteLine("Please enter the size:");
             Console.WriteLine("[1] Extra Small \n[2] Small \n[3] Medium \n[4] Large \n[5] Extra Large");
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetSize();
+            }
+            return userInput;
         }
-        public void GetRoom()
-        {            
+        public string GetRoom()
+        {
+            string userInput;
+            int maxCharacterLength = 4;
+            bool isInputValid = false;
             Console.WriteLine("Room numbers have a maximum of three digits");
             Console.WriteLine("Please enter the room number:");
-            //needs a validater - METHOD
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetRoom();
+            }
+            return userInput;
         }
-        public void GetPersonalityColor()
+        public string GetPersonalityColor()
         {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2", "3", "4" };
+            string userInput;
             Console.WriteLine("Please enter the personality color:");
             Console.WriteLine("[1] Purple \n[2] Orange \n[3] Green \n[4] Unrated/Pink");
-            //needs a validater - METHOD
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetPersonalityColor();
+            }
+            return userInput;
         }
     }
 }

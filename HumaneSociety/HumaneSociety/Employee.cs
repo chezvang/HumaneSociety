@@ -41,20 +41,22 @@ namespace HumaneSociety
 
         public void AddAnimal()
         {
-            ui.GetAnimalName();
-            //GetInput - UI Class
-            ui.GetSpecies();
-            //GetInput - UI Class
-            ui.GetGender();
-            //GetInput - UI Class
-            ui.GetAge();
-            //GetInput - UI Class
-            ui.GetSize();
-            //GetInput - UI Class
-            ui.GetRoom();
-            //GetInput - UI Class
-            ui.GetPersonalityColor();
-            //GetInput - UI Class
+            string animalName;
+            string species;
+            string gender;
+            string age;
+            string size;
+            string room;
+            string personalityColor;   
+              
+            animalName = ui.GetAnimalName();
+            species = ui.GetSpecies();
+            gender = ui.GetGender();
+            age = ui.GetAge();
+            size = ui.GetSize();
+            room = ui.GetRoom();
+            personalityColor = ui.GetPersonalityColor();
+
         }
 
         public void SearchAnimal()

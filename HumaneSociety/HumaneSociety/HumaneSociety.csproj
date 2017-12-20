@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adopter.cs" />
+    <Compile Include="DatabaseWriter.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HumaneSociety.cs" />
     <Compile Include="Program.cs" />
