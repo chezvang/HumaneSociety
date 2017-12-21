@@ -22,7 +22,7 @@ namespace HumaneSociety
             userInput = Console.ReadLine();
             return userInput;
         }
-        private bool ValidateUserInput(List<string> options, string userInput)
+        public bool ValidateUserInput(List<string> options, string userInput)
         {
             if (options.Contains(userInput))
             {
@@ -30,7 +30,7 @@ namespace HumaneSociety
             }
             return false;            
         }
-        private bool ValidateUserInput(string userInput, int maxCharacterLength)
+        public bool ValidateUserInput(string userInput, int maxCharacterLength)
         {
             if(userInput.Length < maxCharacterLength )
             {
