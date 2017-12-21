@@ -65,10 +65,21 @@ namespace HumaneSociety
 
         public void SearchAnimal()
         {
-            Console.WriteLine("How would you like to search for the animal?");
-            Console.WriteLine("[1] Name \n[2] Type \n[3] Room \n[4] Return");
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2", "3", "4" };
+            Console.WriteLine("What type of animal are you searching for?");
+            Console.WriteLine("[1] Dog \n[2] Cat \n[3] Small Animal \n[4] Return");
             string option = Console.ReadLine();
-            SearchOption(option);
+            isInputValid = ui.ValidateUserInput(options, option);
+            if(isInputValid)
+            {
+                SearchOption(option);
+            }
+            else
+            {
+                ui.IncorrectInput();
+                SearchAnimal();
+            }
         }
 
         public void SearchOption(string option)
@@ -76,13 +87,13 @@ namespace HumaneSociety
             switch(option)
             {
                 case "1":
-
+                    Console.WriteLine("Searching for a dog!");
                     break;
                 case "2":
-
+                    Console.WriteLine("Searching for a cat!");
                     break;
                 case "3":
-
+                    Console.WriteLine("Searching for a small animal!");
                     break;
                 case "4":
                     EmployeeMainMenu();
