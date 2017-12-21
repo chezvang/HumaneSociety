@@ -60,7 +60,6 @@ namespace HumaneSociety
             size = ui.GetSize();
             room = ui.GetRoom();
             personalityColor = ui.GetPersonalityColor();
-
         }
 
         public void ChooseAnimalTypeToSearch()
@@ -118,7 +117,7 @@ namespace HumaneSociety
             isInputValid = ui.ValidateUserInput(options, option);
             if (isInputValid)
             {
-                AnimalTypeSearchOption(option);
+                AnimalTraitSearchOption(option, referenceTable);
             }
             else
             {
@@ -126,31 +125,50 @@ namespace HumaneSociety
                 ChooseAnimalTraitToSearch(referenceTable);
             }
         }
-        public void AnimalTraitSearchOption(string option)
+        public void AnimalTraitSearchOption(string option, string referenceTable)
         {
             string referenceColumn;
+            string userInput;
             switch (option)
             {
                 case "1":
-                    referenceColumn = "Animals.Dogs";
-                    ChooseAnimalTraitToSearch(referenceColumn);
+                    referenceColumn = "Animal_Name";
+                    userInput = ui.GetAnimalName();
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "2":
-                    referenceColumn = "Animals.Cats";
-                    ChooseAnimalTraitToSearch(referenceColumn);
+                    referenceColumn = "Size";
+                    userInput = ui.GetSize();
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "3":
-                    referenceColumn = "Animals.Small_Animals";
-                    ChooseAnimalTraitToSearch(referenceColumn);
+                    referenceColumn = "Room";
+                    userInput = ui.GetRoom();
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "4":
-                    EmployeeMainMenu();
+                    referenceColumn = "Shots";
+                    userInput =
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
+                case "5":
+                    referenceColumn = "Food";
+                    userInput =
+                    ConductSearch(referenceTable, referenceColumn, userInput);
+                    break;
+                case "6":
+                    ChooseAnimalTypeToSearch();
+                    break;                    
                 default:
-
+                    ui.IncorrectInput();
                     break;
+                    //SELECT * FROM referenceTable WHERE referenceColumn=userInput
 
             }
+        }
+        private void ConductSearch(string referenceTable, string referenceColumn, string userInput)
+        {
+
         }
 
         //void ISqlConnector.OpenSqlConnection()
@@ -167,11 +185,11 @@ namespace HumaneSociety
         //    conn.Close();
         //}
 
-        public void Read(SqlConnection conn)
+        public void Read(SqlConnection conn, string command)
         {
             SqlDataReader myReader = null;
             //SqlCommand myCommand = new SqlCommand(commandString, conn);
-            SqlCommand myCommand = new SqlCommand("select * from Animals.Sizes", conn);        
+            SqlCommand myCommand = new SqlCommand(command, conn);        
             myReader = myCommand.ExecuteReader();
             while(myReader.Read())
             { 
