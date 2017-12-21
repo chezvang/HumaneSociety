@@ -199,5 +199,10 @@ namespace HumaneSociety
             }
             return userInput;
         }
+        public string DisplayInput()
+        {
+
+            
+        }
     }
 }

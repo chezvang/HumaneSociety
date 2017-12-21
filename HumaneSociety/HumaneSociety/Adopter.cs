@@ -12,7 +12,7 @@ namespace HumaneSociety
 
         public void AdopterNewUserPrompt()
         {
-            Console.WriteLine("Are you a new user?"); // y/n?
+            Console.WriteLine("Are you a new user? Enter: [y/n]");
             string option = Console.ReadLine();
             AdopterNewUserOption(option);
         }
@@ -43,7 +43,7 @@ namespace HumaneSociety
             string userEmail;
             string userPhone;
 
-            Console.WriteLine("Let's set up your new profile!");
+            Console.WriteLine("Welcome new user. Let's set up your new profile!");
             userName = ui.GetAnimalName();
             userAge = ui.GetAge();
             userGender = ui.GetGender();
@@ -55,7 +55,23 @@ namespace HumaneSociety
 
         public void AdopterMainMenu() //adopter search menu
         {
-            Console.WriteLine("");
+            Console.WriteLine("Welcome Adopter, what would you like to do today?");
+            Console.WriteLine("[1] Adopt Pet \n[2] Search Pets");
+            string option = Console.ReadLine();
+            AdopterMainMenuOption(option);
+        }
+
+        public void AdopterMainMenuOption(string option)
+        {
+            switch(option)
+            {
+                case "1":
+
+                    break;
+                case "2":
+
+                    break;
+            }
         }
     }
 }
