@@ -126,6 +126,32 @@ namespace HumaneSociety
                 ChooseAnimalTraitToSearch(referenceTable);
             }
         }
+        public void AnimalTraitSearchOption(string option)
+        {
+            string referenceColumn;
+            switch (option)
+            {
+                case "1":
+                    referenceColumn = "Animals.Dogs";
+                    ChooseAnimalTraitToSearch(referenceColumn);
+                    break;
+                case "2":
+                    referenceColumn = "Animals.Cats";
+                    ChooseAnimalTraitToSearch(referenceColumn);
+                    break;
+                case "3":
+                    referenceColumn = "Animals.Small_Animals";
+                    ChooseAnimalTraitToSearch(referenceColumn);
+                    break;
+                case "4":
+                    EmployeeMainMenu();
+                    break;
+                default:
+
+                    break;
+
+            }
+        }
 
         //void ISqlConnector.OpenSqlConnection()
         //{
