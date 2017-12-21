@@ -27,7 +27,7 @@ namespace HumaneSociety
                     employee.EmployeeMainMenu();
                     break;
                 case "2":
-                    adopter.AdopterMainMenu();
+                    adopter.AdopterNewUserPrompt();
                     break;
                 default:
                     ui.IncorrectInput();

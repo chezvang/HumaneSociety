@@ -154,5 +154,55 @@ namespace HumaneSociety
             }
             return userInput;
         }
+        public string GetEmail()
+        {
+            string userInput;
+            int maxCharacterLength = 80;
+            bool isInputValid = false;
+            Console.WriteLine("Please enter your email:");
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetEmail();
+            }
+            return userInput;
+        }
+        public string GetPhone()
+        {
+            string userInput;
+            int maxCharacterLength = 11;
+            bool isInputValid = false;
+            Console.WriteLine("Please enter your phone number:");
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetPhone();
+            }
+            return userInput;
+        }
+        public string GetProfile()
+        {
+            string userInput;
+            int maxCharacterLength = 1000;
+            bool isInputValid = false;
+            Console.WriteLine("This is your profile. Tell us something about your self!:");
+            userInput = GetUserInput();
+            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetProfile();
+            }
+            return userInput;
+        }
+        public string DisplayInput()
+        {
+
+            
+        }
     }
 }
