@@ -51,12 +51,13 @@ namespace HumaneSociety
             userPhone = ui.GetPhone();
             userProfile = ui.GetProfile();
             //Confirmation method for inputted data "is this information correct?"
+
         }
 
         public void AdopterMainMenu() //adopter search menu
         {
             Console.WriteLine("Welcome Adopter, what would you like to do today?");
-            Console.WriteLine("[1] Adopt Pet \n[2] Search Pets");
+            Console.WriteLine("[1] Search Pet \n[2] Return");
             string option = Console.ReadLine();
             AdopterMainMenuOption(option);
         }
@@ -66,12 +67,62 @@ namespace HumaneSociety
             switch(option)
             {
                 case "1":
-
+                    AdopterSearchPet();
                     break;
                 case "2":
-
+                    AdopterNewUserPrompt();
+                    break;
+                default:
+                    ui.IncorrectInput();
                     break;
             }
         }
+
+        public void AdopterSearchPet()
+        {
+            Console.WriteLine("Adopter, searching for a pet. How would you like to search?");
+            Console.WriteLine("[1] By Dog \n[2] By Cat \n[3] By Small Animal \n[4] Return");
+            string option = Console.ReadLine();
+            AdopterSearchOption(option);
+        }
+
+        public void AdopterSearchOption(string option)
+        {
+            string referenceTable;
+            switch (option)
+            {
+                case "1":
+                    referenceTable = "Animals.Dogs";
+                    //ChooseAnimalTraitToSearch(referenceTable);
+                    AdopterSearchByTraits();
+                    break;
+                case "2":
+                    referenceTable = "Animals.Cats";
+                    //ChooseAnimalTraitToSearch(referenceTable);
+                    AdopterSearchByTraits();
+                    break;
+                case "3":
+                    referenceTable = "Animals.Small_Animals";
+                    //ChooseAnimalTraitToSearch(referenceTable);
+                    AdopterSearchByTraits();
+                    break;
+                case "4":
+                    AdopterMainMenu();
+                    break;
+                default:
+                    ui.IncorrectInput();
+                    break;
+            }
+        }
+
+        public void AdopterSearchByTraits()
+        {
+
+        }
     }
+
+
+
+
+    //name, size, room, shots, food
 }

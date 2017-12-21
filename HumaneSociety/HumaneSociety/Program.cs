@@ -18,12 +18,12 @@ namespace HumaneSociety
             //db.GetTable
 
             HumaneSociety humane = new HumaneSociety();
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
-                conn.Open();
-                //humane.employee.Write(conn);
-            }
+            //using (SqlConnection conn = new SqlConnection())
+            //{
+            //    conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
+            //    conn.Open();
+            //    //humane.employee.Write(conn);
+            //}
             humane.StartProgram();
 
 
