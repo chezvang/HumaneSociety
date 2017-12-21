@@ -148,13 +148,13 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    userInput =
-                    ConductSearch(referenceTable, referenceColumn, userInput);
+                    //userInput =
+                    //ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "5":
                     referenceColumn = "Food";
-                    userInput =
-                    ConductSearch(referenceTable, referenceColumn, userInput);
+                    //userInput =
+                    //ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "6":
                     ChooseAnimalTypeToSearch();

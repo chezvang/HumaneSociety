@@ -22,6 +22,7 @@ namespace HumaneSociety
 	using System;
 	
 	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="TheHumaneSociety")]
 	public partial class LinqToSqlDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -29,7 +30,19 @@ namespace HumaneSociety
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertDog(Dog instance);
+    partial void UpdateDog(Dog instance);
+    partial void DeleteDog(Dog instance);
+    partial void InsertTest(Test instance);
+    partial void UpdateTest(Test instance);
+    partial void DeleteTest(Test instance);
     #endregion
+		
+		public LinqToSqlDataContext() : 
+				base(global::HumaneSociety.Properties.Settings.Default.TheHumaneSocietyConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public LinqToSqlDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -53,6 +66,523 @@ namespace HumaneSociety
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<Dog> Dogs
+		{
+			get
+			{
+				return this.GetTable<Dog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Test_Animal> Test_Animals
+		{
+			get
+			{
+				return this.GetTable<Test_Animal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Test> Tests
+		{
+			get
+			{
+				return this.GetTable<Test>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Dogs")]
+	public partial class Dog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Dog_Id;
+		
+		private string _Species;
+		
+		private string _Animal_Name;
+		
+		private string _Gender;
+		
+		private string _Age;
+		
+		private string _Size;
+		
+		private string _Adopted;
+		
+		private string _Room;
+		
+		private string _Food;
+		
+		private string _Personality_Color;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDog_IdChanging(int value);
+    partial void OnDog_IdChanged();
+    partial void OnSpeciesChanging(string value);
+    partial void OnSpeciesChanged();
+    partial void OnAnimal_NameChanging(string value);
+    partial void OnAnimal_NameChanged();
+    partial void OnGenderChanging(string value);
+    partial void OnGenderChanged();
+    partial void OnAgeChanging(string value);
+    partial void OnAgeChanged();
+    partial void OnSizeChanging(string value);
+    partial void OnSizeChanged();
+    partial void OnAdoptedChanging(string value);
+    partial void OnAdoptedChanged();
+    partial void OnRoomChanging(string value);
+    partial void OnRoomChanged();
+    partial void OnFoodChanging(string value);
+    partial void OnFoodChanged();
+    partial void OnPersonality_ColorChanging(string value);
+    partial void OnPersonality_ColorChanged();
+    #endregion
+		
+		public Dog()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dog_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Dog_Id
+		{
+			get
+			{
+				return this._Dog_Id;
+			}
+			set
+			{
+				if ((this._Dog_Id != value))
+				{
+					this.OnDog_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Dog_Id = value;
+					this.SendPropertyChanged("Dog_Id");
+					this.OnDog_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Species", DbType="VarChar(80) NOT NULL", CanBeNull=false)]
+		public string Species
+		{
+			get
+			{
+				return this._Species;
+			}
+			set
+			{
+				if ((this._Species != value))
+				{
+					this.OnSpeciesChanging(value);
+					this.SendPropertyChanging();
+					this._Species = value;
+					this.SendPropertyChanged("Species");
+					this.OnSpeciesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Animal_Name", DbType="VarChar(80)")]
+		public string Animal_Name
+		{
+			get
+			{
+				return this._Animal_Name;
+			}
+			set
+			{
+				if ((this._Animal_Name != value))
+				{
+					this.OnAnimal_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Animal_Name = value;
+					this.SendPropertyChanged("Animal_Name");
+					this.OnAnimal_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this.OnGenderChanging(value);
+					this.SendPropertyChanging();
+					this._Gender = value;
+					this.SendPropertyChanged("Gender");
+					this.OnGenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", DbType="VarChar(5)")]
+		public string Age
+		{
+			get
+			{
+				return this._Age;
+			}
+			set
+			{
+				if ((this._Age != value))
+				{
+					this.OnAgeChanging(value);
+					this.SendPropertyChanging();
+					this._Age = value;
+					this.SendPropertyChanged("Age");
+					this.OnAgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Size
+		{
+			get
+			{
+				return this._Size;
+			}
+			set
+			{
+				if ((this._Size != value))
+				{
+					this.OnSizeChanging(value);
+					this.SendPropertyChanging();
+					this._Size = value;
+					this.SendPropertyChanged("Size");
+					this.OnSizeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Adopted
+		{
+			get
+			{
+				return this._Adopted;
+			}
+			set
+			{
+				if ((this._Adopted != value))
+				{
+					this.OnAdoptedChanging(value);
+					this.SendPropertyChanging();
+					this._Adopted = value;
+					this.SendPropertyChanged("Adopted");
+					this.OnAdoptedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Room", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Room
+		{
+			get
+			{
+				return this._Room;
+			}
+			set
+			{
+				if ((this._Room != value))
+				{
+					this.OnRoomChanging(value);
+					this.SendPropertyChanging();
+					this._Room = value;
+					this.SendPropertyChanged("Room");
+					this.OnRoomChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Food
+		{
+			get
+			{
+				return this._Food;
+			}
+			set
+			{
+				if ((this._Food != value))
+				{
+					this.OnFoodChanging(value);
+					this.SendPropertyChanging();
+					this._Food = value;
+					this.SendPropertyChanged("Food");
+					this.OnFoodChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality_Color", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Personality_Color
+		{
+			get
+			{
+				return this._Personality_Color;
+			}
+			set
+			{
+				if ((this._Personality_Color != value))
+				{
+					this.OnPersonality_ColorChanging(value);
+					this.SendPropertyChanging();
+					this._Personality_Color = value;
+					this.SendPropertyChanged("Personality_Color");
+					this.OnPersonality_ColorChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Test_Animals")]
+	public partial class Test_Animal
+	{
+		
+		private int _Test_Id;
+		
+		private string _Animal_Name;
+		
+		private string _Color;
+		
+		private string _Personality;
+		
+		public Test_Animal()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Test_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Test_Id
+		{
+			get
+			{
+				return this._Test_Id;
+			}
+			set
+			{
+				if ((this._Test_Id != value))
+				{
+					this._Test_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Animal_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Animal_Name
+		{
+			get
+			{
+				return this._Animal_Name;
+			}
+			set
+			{
+				if ((this._Animal_Name != value))
+				{
+					this._Animal_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this._Color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Personality
+		{
+			get
+			{
+				return this._Personality;
+			}
+			set
+			{
+				if ((this._Personality != value))
+				{
+					this._Personality = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Test")]
+	public partial class Test : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Test_Id;
+		
+		private string _Animal_Name;
+		
+		private string _Color;
+		
+		private string _Personality;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTest_IdChanging(int value);
+    partial void OnTest_IdChanged();
+    partial void OnAnimal_NameChanging(string value);
+    partial void OnAnimal_NameChanged();
+    partial void OnColorChanging(string value);
+    partial void OnColorChanged();
+    partial void OnPersonalityChanging(string value);
+    partial void OnPersonalityChanged();
+    #endregion
+		
+		public Test()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Test_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Test_Id
+		{
+			get
+			{
+				return this._Test_Id;
+			}
+			set
+			{
+				if ((this._Test_Id != value))
+				{
+					this.OnTest_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Test_Id = value;
+					this.SendPropertyChanged("Test_Id");
+					this.OnTest_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Animal_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Animal_Name
+		{
+			get
+			{
+				return this._Animal_Name;
+			}
+			set
+			{
+				if ((this._Animal_Name != value))
+				{
+					this.OnAnimal_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Animal_Name = value;
+					this.SendPropertyChanged("Animal_Name");
+					this.OnAnimal_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this.OnColorChanging(value);
+					this.SendPropertyChanging();
+					this._Color = value;
+					this.SendPropertyChanged("Color");
+					this.OnColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Personality
+		{
+			get
+			{
+				return this._Personality;
+			}
+			set
+			{
+				if ((this._Personality != value))
+				{
+					this.OnPersonalityChanging(value);
+					this.SendPropertyChanging();
+					this._Personality = value;
+					this.SendPropertyChanged("Personality");
+					this.OnPersonalityChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

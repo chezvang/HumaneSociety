@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="LinqToSql">
+  <DataContextMoniker Name="/LinqToSqlDataContext" />
+  <nestedChildShapes>
+    <classShape Id="eb6f06a3-5b40-4c93-bb3f-667f196da6a3" absoluteBounds="0.5, 0.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/LinqToSqlDataContext/Dog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47cca9c8-9cb3-4567-8957-09dcda89eb86" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c0f6a417-750a-44fd-b745-b264aa2a6ef8" absoluteBounds="2.75, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LinqToSqlDataContext/Test_Animal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="45df0fa9-3c25-43ba-b5a0-e6fc298b5494" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e7e72898-daf8-445c-b69b-c3de50c3c84d" absoluteBounds="5, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/LinqToSqlDataContext/Test" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c37e250a-1fa2-4334-84f6-0e2f062e06e3" absoluteBounds="5.015, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
