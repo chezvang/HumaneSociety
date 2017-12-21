@@ -11,14 +11,14 @@ namespace HumaneSociety
         public string GetUserInput(List<string> options)
         {
             string userInput;
-            Console.WriteLine("Please make a selection:");
+            Console.WriteLine(" ");
             userInput = Console.ReadLine();
             return userInput;
         }
         public string GetUserInput()
         {
             string userInput;
-            Console.WriteLine("Please make a selection:");
+            Console.WriteLine(" ");
             userInput = Console.ReadLine();
             return userInput;
         }
@@ -50,6 +50,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 80;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("Please enter the name:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -65,6 +66,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 80;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("Please enter the species:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -80,8 +82,9 @@ namespace HumaneSociety
             bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2" };
             string userInput;
-            Console.WriteLine("[1] Male \n[2] Female");
+            Console.Clear();
             Console.WriteLine("Please enter the gender:");
+            Console.WriteLine("[1] Male \n[2] Female");
             userInput = GetUserInput(options);
             isInputValid = ValidateUserInput(options, userInput);
             if (!isInputValid)
@@ -96,6 +99,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 5;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("Please enter the age:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -110,7 +114,8 @@ namespace HumaneSociety
         {
             bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2", "3", "4", "5" };
-            string userInput;       
+            string userInput;
+            Console.Clear();
             Console.WriteLine("Please enter the size:");
             Console.WriteLine("[1] Extra Small \n[2] Small \n[3] Medium \n[4] Large \n[5] Extra Large");
             userInput = GetUserInput(options);
@@ -127,6 +132,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 4;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("Room numbers have a maximum of three digits");
             Console.WriteLine("Please enter the room number:");
             userInput = GetUserInput();
@@ -143,6 +149,7 @@ namespace HumaneSociety
             bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2", "3", "4" };
             string userInput;
+            Console.Clear();
             Console.WriteLine("Please enter the personality color:");
             Console.WriteLine("[1] Purple \n[2] Orange \n[3] Green \n[4] Unrated/Pink");
             userInput = GetUserInput(options);
@@ -159,6 +166,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 80;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("Please enter your email:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -174,6 +182,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 11;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("Please enter your phone number:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -189,6 +198,7 @@ namespace HumaneSociety
             string userInput;
             int maxCharacterLength = 1000;
             bool isInputValid = false;
+            Console.Clear();
             Console.WriteLine("This is your profile. Tell us something about your self!:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -199,10 +209,10 @@ namespace HumaneSociety
             }
             return userInput;
         }
-        //public string DisplayInput()
+        //public void DisplayInput()
         //{
 
-            
+
         //}
     }
 }

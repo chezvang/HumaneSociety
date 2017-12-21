@@ -14,7 +14,7 @@ namespace HumaneSociety
 
         public void InitialPrompt()
         {
-            Console.WriteLine("Welcome to The Humane Society! \nChoose your path: \n[1] Employee \n[2] Adopter");
+            Console.WriteLine("Welcome to The Humane Society! \nChoose your path: \n[1] Employee \n[2] Adopter \n[3] Exit Program");
             string option = Console.ReadLine();
             InitialPromptOptions(option);
         }
@@ -28,6 +28,9 @@ namespace HumaneSociety
                     break;
                 case "2":
                     adopter.AdopterNewUserPrompt();
+                    break;
+                case "3":
+                    Environment.Exit(0);
                     break;
                 default:
                     ui.IncorrectInput();
