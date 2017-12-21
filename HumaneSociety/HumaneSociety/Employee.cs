@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace HumaneSociety
 {
     class Employee
     {
         UserInterface ui = new UserInterface();
-
+        private void CloseSqlConnection()
+        {
+            
+        }
         public void EmployeeMainMenu()
         {
             Console.Clear();
@@ -88,6 +92,40 @@ namespace HumaneSociety
                     break;
 
             }
+        }
+
+        //void ISqlConnector.OpenSqlConnection()
+        //{
+        //    using (SqlConnection conn = new SqlConnection())
+        //    {
+        //        conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
+        //        conn.Open();
+        //    }
+        //}
+
+        //void ISqlConnector.CloseSqlConnection(SqlConnection conn)
+        //{
+        //    conn.Close();
+        //}
+
+        public void Read(SqlConnection conn)
+        {
+            SqlDataReader myReader = null;
+            //SqlCommand myCommand = new SqlCommand(commandString, conn);
+            SqlCommand myCommand = new SqlCommand("select * from Animals.Sizes", conn);        
+            myReader = myCommand.ExecuteReader();
+            while(myReader.Read())
+            { 
+                 Console.WriteLine(myReader["Size"].ToString());
+            }
+        }
+
+        public void Write(SqlConnection conn, string command)
+        {
+            //SqlCommand myCommand = new SqlCommand(commandString, conn);
+            SqlCommand myCommand = new SqlCommand(command, conn);
+            myCommand.ExecuteNonQuery();
+
         }
     }
 }

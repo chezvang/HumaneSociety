@@ -10,7 +10,7 @@ namespace HumaneSociety
     {
         UserInterface ui = new UserInterface();
         Adopter adopter = new Adopter();
-        Employee employee = new Employee();
+       public Employee employee = new Employee();
 
         public void InitialPrompt()
         {
