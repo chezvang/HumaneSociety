@@ -22,7 +22,7 @@ namespace HumaneSociety
             {
                 conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
                 conn.Open();
-                humane.employee.Write(conn);
+                //humane.employee.Write(conn);
             }
             humane.StartProgram();
 
