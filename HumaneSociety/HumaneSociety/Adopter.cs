@@ -59,21 +59,17 @@ namespace HumaneSociety
             Console.Clear();
             Console.WriteLine("Name: " + userName + "\nAge: " + userAge + "\nGender: " + userGender + "\nEmail: " + userEmail + "\nPhone: " + userPhone);
             Console.WriteLine("Profile:\n" + userProfile);
+            Console.WriteLine("\nIs this information correct? (WARNING: If 'no', your information will be wiped and you will be brought back to the previous menu.");
             write = ConfirmInput();
             if(write == true)
             {
                 //pass all answer variables into write method for SQL databsase
                 AdopterMainMenu();
             }
-            else
-            {
-                Console.WriteLine("Input was not accepted. Returning to previous menu. Press any key to continue.");
-                Console.ReadKey();
                 AdopterNewUserPrompt();
-            }
         }
 
-        public bool ConfirmInput() //add to Employy AddAnimal method
+        public bool ConfirmInput() //add to Employee AddAnimal method
         {
             bool write = false;
 
@@ -83,12 +79,6 @@ namespace HumaneSociety
             {
                 write = true;
                 return write;
-            }
-            Console.Clear();
-            Console.WriteLine("Do you wish to start over? (Warning: information entered will be wiped)");
-            if(answer != "n")
-            {
-                AdopterNewUserPrompt();
             }
             return false;
         }
@@ -103,7 +93,10 @@ namespace HumaneSociety
         //    //pass answer into write method for SQL database
         //}
 
-
+        public void AnimalShots()
+        {
+            Console.WriteLine("");
+        }
 
         public void AdopterMainMenu() //adopter search menu
         {
@@ -171,7 +164,7 @@ namespace HumaneSociety
         {
             Console.Clear();
             Console.WriteLine("What trait would you like to search by?");
-            Console.WriteLine("[1] Name \n[2] Size \n[3]Room \n[4]Shots \n[5] Food \n[6] Return");
+            Console.WriteLine("[1] Name \n[2] Size \n[3] Room \n[4] Shots \n[5] Food \n[6] Return");
             string option = Console.ReadLine();
             AdopterSearchByTraitsOptions(option, referenceTable);
         }

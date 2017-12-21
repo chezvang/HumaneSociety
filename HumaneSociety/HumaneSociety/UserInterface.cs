@@ -11,14 +11,14 @@ namespace HumaneSociety
         public string GetUserInput(List<string> options)
         {
             string userInput;
-            Console.WriteLine("Please make a selection:");
+            Console.WriteLine(" ");
             userInput = Console.ReadLine();
             return userInput;
         }
         public string GetUserInput()
         {
             string userInput;
-            Console.WriteLine("Please make a selection:");
+            Console.WriteLine(" ");
             userInput = Console.ReadLine();
             return userInput;
         }
