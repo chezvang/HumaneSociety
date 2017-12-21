@@ -31,7 +31,7 @@ namespace HumaneSociety
                     AddAnimal();
                     break;
                 case "2":
-                    SearchAnimal();
+                    ChooseAnimalTypeToSearch();
                     break;
                 case "3":
 
@@ -63,7 +63,7 @@ namespace HumaneSociety
 
         }
 
-        public void SearchAnimal()
+        public void ChooseAnimalTypeToSearch()
         {
             bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2", "3", "4" };
@@ -73,27 +73,31 @@ namespace HumaneSociety
             isInputValid = ui.ValidateUserInput(options, option);
             if(isInputValid)
             {
-                SearchOption(option);
+                AnimalTypeSearchOption(option);
             }
             else
             {
                 ui.IncorrectInput();
-                SearchAnimal();
+                ChooseAnimalTypeToSearch();
             }
         }
 
-        public void SearchOption(string option)
+        public void AnimalTypeSearchOption(string option)
         {
+            string referenceTable;
             switch(option)
             {
                 case "1":
-                    Console.WriteLine("Searching for a dog!");
+                    referenceTable = "Animals.Dogs";
+                    ChooseAnimalTraitToSearch(referenceTable);
                     break;
                 case "2":
-                    Console.WriteLine("Searching for a cat!");
+                    referenceTable = "Animals.Cats";
+                    ChooseAnimalTraitToSearch(referenceTable);
                     break;
                 case "3":
-                    Console.WriteLine("Searching for a small animal!");
+                    referenceTable = "Animals.Small_Animals";
+                    ChooseAnimalTraitToSearch(referenceTable);
                     break;
                 case "4":
                     EmployeeMainMenu();
@@ -102,6 +106,24 @@ namespace HumaneSociety
 
                     break;
 
+            }
+        }
+        private void ChooseAnimalTraitToSearch(string referenceTable)
+        {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2", "3", "4", "5", "6" };
+            Console.WriteLine("What trait would you like to search by?");
+            Console.WriteLine("[1] Name \n[2] Size \n[3] Room \n[4] Shots \n[5] Food \n[6] Return");
+            string option = Console.ReadLine();
+            isInputValid = ui.ValidateUserInput(options, option);
+            if (isInputValid)
+            {
+                AnimalTypeSearchOption(option);
+            }
+            else
+            {
+                ui.IncorrectInput();
+                ChooseAnimalTraitToSearch(referenceTable);
             }
         }
 
