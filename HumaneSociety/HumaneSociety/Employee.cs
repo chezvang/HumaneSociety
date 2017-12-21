@@ -45,21 +45,46 @@ namespace HumaneSociety
 
         public void AddAnimal()
         {
-            string animalName;
-            string species;
-            string gender;
-            string age;
-            string size;
-            string room;
-            string personalityColor;   
               
-            animalName = ui.GetAnimalName();
-            species = ui.GetSpecies();
-            gender = ui.GetGender();
-            age = ui.GetAge();
-            size = ui.GetSize();
-            room = ui.GetRoom();
-            personalityColor = ui.GetPersonalityColor();
+            string animalName = ui.GetAnimalName();
+            string species = ui.GetSpecies();
+            string gender = ui.GetGender();
+            string age = ui.GetAge();
+            string size = ui.GetSize();
+            string room = ui.GetRoom();
+            string personalityColor = ui.GetPersonalityColor();
+
+            DisplayInput(animalName, age, species, gender, size, room, personalityColor);
+        }
+
+        //for employee, AddAnimal Method
+        public void DisplayInput(string animalName, string age, string species, string gender, string size, string room, string personalityColor)
+        {
+            bool write = false;
+
+            Console.Clear();
+            Console.WriteLine("Name: " + animalName + "\nAge: " + age + "\nGender: " + gender + "\nSize: " + size + "\nPersonality Color: " + personalityColor);
+            write = ConfirmInput();
+            if (write == true)
+            {
+                //pass all answer variables into write method for SQL databsase
+                EmployeeMainMenu();
+            }
+            EmployeeMainMenu();
+        }
+
+        public bool ConfirmInput() //add to Employee AddAnimal method
+        {
+            bool write = false;
+
+            Console.WriteLine("\nIs this information correct? [y/n]");
+            string answer = Console.ReadLine();
+            if (answer != "n")
+            {
+                write = true;
+                return write;
+            }
+            return false;
         }
 
         public void ChooseAnimalTypeToSearch()
@@ -148,13 +173,13 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    userInput =
-                    ConductSearch(referenceTable, referenceColumn, userInput);
+                    //userInput =
+                    //ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "5":
                     referenceColumn = "Food";
-                    userInput =
-                    ConductSearch(referenceTable, referenceColumn, userInput);
+                    //userInput =
+                    //ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "6":
                     ChooseAnimalTypeToSearch();

@@ -83,16 +83,6 @@ namespace HumaneSociety
             return false;
         }
 
-        //for employee, AddAnimal Method
-        //public void DisplayInput(string animalName, string species, string gender, string size, string room, string personalityColor)
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Name: " + userName + "\nAge: " + userAge + "\nGender: " + userGender + "\nEmail: " + userEmail + "\nPhone: " + userPhone);
-        //    Console.WriteLine("Profile:\n" + userProfile);
-        //    ConfirmInput();
-        //    //pass answer into write method for SQL database
-        //}
-
         public void AnimalShots()
         {
             Console.WriteLine("");
@@ -172,30 +162,34 @@ namespace HumaneSociety
         public void AdopterSearchByTraitsOptions(string option, string referenceTable)
         {
             string referenceColumn;
+            string userInput;
             switch (option)
                 //use LINQ for search output
             {
                 case "1":
                     referenceColumn = "Name";
-                    referenceColumn = ui.GetAnimalName();
+                    userInput = ui.GetAnimalName();
                     //pass referenceColumn to SQL read
                     break;
                 case "2":
                     referenceColumn = "Size";
-                    referenceColumn = ui.GetSize();
-
+                    userInput = ui.GetSize();
+                    //pass referenceColumn to SQL read
                     break;
                 case "3":
                     referenceColumn = "Room";
-
+                    userInput = ui.GetRoom();
+                    //pass referenceColumn to SQL read
                     break;
                 case "4":
                     referenceColumn = "Shots";
-
+                    //userInput = ui.GetShots();
+                    //pass referenceColumn to SQL read
                     break;
                 case "5":
                     referenceColumn = "Food";
-
+                    //userInput = ui.GetFood();
+                    //pass referenceColumn to SQL read
                     break;
                 case "6":
                     AdopterTypeToSearch();
