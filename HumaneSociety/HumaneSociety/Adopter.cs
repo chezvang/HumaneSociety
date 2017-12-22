@@ -48,8 +48,6 @@ namespace HumaneSociety
             string userEmail = ui.GetEmail();
             string userPhone = ui.GetPhone();
             string userProfile = ui.GetProfile();
-            //Confirmation method for inputted data "is this information correct?"
-            //ui.DisplayInput(); //move DisplayInput into the UserInterfaces class
             DisplayInput(userProfile, userName, userAge, userGender, userEmail, userProfile);
         }
 
@@ -58,31 +56,24 @@ namespace HumaneSociety
             bool write = false;
 
             Console.Clear();
-            Console.WriteLine("Name: " + userName + "\nAge: " + userAge + "\nGender: " + userGender + "\nEmail: " + userEmail + "\nPhone: " + userPhone);
-            Console.WriteLine("Profile:\n" + userProfile);
+            AdopterDisplayInput(userName, userAge, userGender, userEmail, userPhone, userProfile);
             Console.WriteLine("\nIs this information correct? (WARNING: If 'no', your information will be wiped and you will be brought back to the previous menu.");
-            write = ConfirmInput();
+            write = ui.ConfirmInput();
             if(write == true)
             {
-                Write(userName, userAge, userGender, userEmail, userPhone, userProfile);
+                //Write(userName, userAge, userGender, userEmail, userPhone, userProfile);
                 //pass all answer variables into write method for SQL databsase
                 AdopterMainMenu();
             }
                 AdopterNewUserPrompt();
         }
 
-        public bool ConfirmInput() //add to Employee AddAnimal method
+        public void AdopterDisplayInput(string userName, string userAge, string userGender, string userEmail, string userPhone, string userProfile)
         {
-            bool write = false;
-
-            Console.WriteLine("\nIs this information correct? [y/n]");
-            string answer = Console.ReadLine();
-            if(answer != "n")
-            {
-                write = true;
-                return write;
-            }
-            return false;
+            userGender = ui.ConvertGenderOption(userGender);
+            Console.Clear();
+            Console.WriteLine("Name: " + userName + "\nAge: " + userAge + "\nGender: " + userGender + "\nEmail: " + userEmail + "\nPhone: " + userPhone);
+            Console.WriteLine("Profile:\n" + userProfile);
         }
 
         public void AnimalShots()
@@ -90,7 +81,7 @@ namespace HumaneSociety
             Console.WriteLine("");
         }
 
-        public void AdopterMainMenu() //adopter search menu
+        public void AdopterMainMenu()
         {
             Console.Clear();
             Console.WriteLine("Welcome Adopter, what would you like to do today?");
@@ -166,7 +157,6 @@ namespace HumaneSociety
             string referenceColumn;
             string userInput;
             switch (option)
-                //use LINQ for search output
             {
                 case "1":
                     referenceColumn = "Name";
@@ -211,7 +201,7 @@ namespace HumaneSociety
             adopt = ui.ConfirmInput();
             if (adopt == false)
             {
-                Console.WriteLine("You have choosen not to give this pet a home :( \nReturning to previous menu. (Press any key to continue)");
+                Console.WriteLine("You have chosen not to give this pet a home :( \nReturning to previous menu. (Press any key to continue)");
                 Console.ReadKey();
                 //return to previous menu, where am i coming from?
             }
@@ -220,9 +210,17 @@ namespace HumaneSociety
 
         public void AdopterPayment()
         {
-            bool confirm = false;
             int price = PetCostGenerator();
-            Console.WriteLine("This pet costs: $" + price + "\nDo you wish to purchase this pet?");
+            Console.WriteLine("This pet costs: $" + price + "\nDo you wish to purchase this pet? [y/n]");
+            string answer = Console.ReadLine();
+            if(answer == "y")
+            {
+                Console.WriteLine("Thank you for giving this lovely pet a new home! :) ");
+                wallet.AddToWallet(price);
+            }
+            Console.WriteLine("You have chosen not to give this pet a home :( \nReturning to previous menu. (Press any key to continue)");
+            Console.ReadKey();
+            //return to previous menu, where am i coming from?
         }
 
         private int PetCostGenerator()
@@ -232,22 +230,22 @@ namespace HumaneSociety
             return price;
         }
 
-        public void Write(string userName, string userAge, string userGender, string userEmail, string userPhone, string userProfile)
-        {
-            DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
-            Test objWrite = new Test(); //change 'Test' to User table name
-            objWrite.Name = userName; //change to match table column
-            objWrite.Age = userAge; //change to match table column
-            objWrite.Gender = userGender; //change to match table column
-            objWrite.Email = userEmail; //change to match table column
-            objWrite.Phone = userPhone; //change to match table column
-            objWrite.Profile = userProfile; //change to match table column
-            theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite); //change to match table name
-            theHumaneSociety.SubmitChanges();
+        //public void Write(string userName, string userAge, string userGender, string userEmail, string userPhone, string userProfile)
+        //{
+        //    DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+        //    Test objWrite = new Test(); //change 'Test' to User table name
+        //    objWrite.Name = userName; //change to match table column
+        //    objWrite.Age = userAge; //change to match table column
+        //    objWrite.Gender = userGender; //change to match table column
+        //    objWrite.Email = userEmail; //change to match table column
+        //    objWrite.Phone = userPhone; //change to match table column
+        //    objWrite.Profile = userProfile; //change to match table column
+        //    theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite); //change to match table name
+        //    theHumaneSociety.SubmitChanges();
 
-            Console.WriteLine("Adding Profile");
-            Console.ReadKey();
-        }
+        //    Console.WriteLine("Adding Profile");
+        //    Console.ReadKey();
+        //}
 
         //public void Read(SqlConnection conn)
         //{

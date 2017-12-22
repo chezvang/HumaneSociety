@@ -94,12 +94,13 @@ namespace HumaneSociety
             }
             return userInput;
         }
-        public string ConvertGenderOption(string userInput) //for display purposes only
+        public string ConvertGenderOption(string userInput)
         {
             string gender;
-            if (userInput != "2")
+            if (userInput == "1")
             {
                 gender = "Male";
+                return gender;
             }
             gender = "Female";
             return gender;
@@ -154,7 +155,7 @@ namespace HumaneSociety
             }
             return userInput;
         }
-        public string ConvertSizeOption(string userInput) //for display purposes only
+        public string ConvertSizeOption(string userInput)
         {
             switch(userInput)
             {
@@ -284,7 +285,7 @@ namespace HumaneSociety
             Console.Clear();
             Console.WriteLine("Does this animal have their shots?:");
             Console.WriteLine("[1] Has Shots \n[2] No Shots \n[3] All Shots");
-            string userInput;
+            //string userInput;
             Console.Clear();
             Console.WriteLine("How do you want to search shots?:");
             Console.WriteLine("[1] Has Shots \n[2] No Shots");
