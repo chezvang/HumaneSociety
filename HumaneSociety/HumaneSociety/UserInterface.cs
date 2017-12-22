@@ -180,10 +180,10 @@ namespace HumaneSociety
         public string GetRoom()
         {
             string userInput;
-            int maxCharacterLength = 4;
+            int maxCharacterLength = 3;
             bool isInputValid = false;
             Console.Clear();
-            Console.WriteLine("Room numbers have a maximum of three digits");
+            Console.WriteLine("Room numbers have a maximum of 2 digits");
             Console.WriteLine("Please enter the room number:");
             userInput = GetUserInput();
             isInputValid = ValidateUserInput(userInput, maxCharacterLength);
@@ -280,10 +280,6 @@ namespace HumaneSociety
         {
             bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2", "3" };
-            string userInput;
-            Console.Clear();
-            Console.WriteLine("Does this animal have their shots?:");
-            Console.WriteLine("[1] Has Shots \n[2] No Shots \n[3] All Shots");
             string userInput;
             Console.Clear();
             Console.WriteLine("How do you want to search shots?:");

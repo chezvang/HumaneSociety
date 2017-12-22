@@ -13,13 +13,141 @@
       <Column Name="Personality_Color_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Shot_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Dog_Room" Member="Rooms" ThisKey="Dog_Id" OtherKey="Dog_ID" Type="Room" />
-      <Association Name="Room_Dog" Member="Room" ThisKey="Room_ID" OtherKey="Room_ID" Type="Room" IsForeignKey="true" />
       <Association Name="Gender_Dog" Member="Gender" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Gender" IsForeignKey="true" />
       <Association Name="Personality_Dog" Member="Personality" ThisKey="Personality_Color_ID" OtherKey="Personality_ID" Type="Personality" IsForeignKey="true" />
       <Association Name="Shot_Dog" Member="Shot" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Shot" IsForeignKey="true" />
       <Association Name="Size_Dog" Member="Size" ThisKey="Size_ID" OtherKey="Size_Id" Type="Size" IsForeignKey="true" />
       <Association Name="Adopted_Status_Dog" Member="Adopted_Status" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Adopted_Status" IsForeignKey="true" />
       <Association Name="Food_Dog" Member="Food" ThisKey="Food_ID" OtherKey="Food_Id" Type="Food" IsForeignKey="true" />
+      <Association Name="Room_Dog" Member="Room" ThisKey="Room_ID" OtherKey="Room_ID" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Gender" Member="Genders">
+    <Type Name="Gender">
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Gender" Member="Gender1" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Gender_Dog" Member="Dogs" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Dog" />
+      <Association Name="Gender_Small_Animal" Member="Small_Animals" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Small_Animal" />
+      <Association Name="Gender_Cat" Member="Cats" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Cat" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Personalities" Member="Personalities">
+    <Type Name="Personality">
+      <Column Name="Personality_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Personality_Dog" Member="Dogs" ThisKey="Personality_ID" OtherKey="Personality_Color_ID" Type="Dog" />
+      <Association Name="Personality_Small_Animal" Member="Small_Animals" ThisKey="Personality_ID" OtherKey="Personality_Color_ID" Type="Small_Animal" />
+      <Association Name="Personality_Cat" Member="Cats" ThisKey="Personality_ID" OtherKey="Personality_Color_ID" Type="Cat" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Shots" Member="Shots">
+    <Type Name="Shot">
+      <Column Name="Shot_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Shot_Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Shot_Dog" Member="Dogs" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Dog" />
+      <Association Name="Shot_Small_Animal" Member="Small_Animals" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Small_Animal" />
+      <Association Name="Shot_Cat" Member="Cats" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Cat" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Sizes" Member="Sizes">
+    <Type Name="Size">
+      <Column Name="Size_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Size" Member="Size1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Size_Dog" Member="Dogs" ThisKey="Size_Id" OtherKey="Size_ID" Type="Dog" />
+      <Association Name="Size_Small_Animal" Member="Small_Animals" ThisKey="Size_Id" OtherKey="Size_ID" Type="Small_Animal" />
+      <Association Name="Size_Cat" Member="Cats" ThisKey="Size_Id" OtherKey="Size_ID" Type="Cat" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Adopted_Status" Member="Adopted_Status">
+    <Type Name="Adopted_Status">
+      <Column Name="Adopted_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Adopted_Status" Member="Adopted_Status1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Adopted_Status_Dog" Member="Dogs" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Dog" />
+      <Association Name="Adopted_Status_Small_Animal" Member="Small_Animals" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Small_Animal" />
+      <Association Name="Adopted_Status_Cat" Member="Cats" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Cat" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Food" Member="Foods">
+    <Type Name="Food">
+      <Column Name="Food_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Food_Type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Food_Dog" Member="Dogs" ThisKey="Food_Id" OtherKey="Food_ID" Type="Dog" />
+      <Association Name="Food_Small_Animal" Member="Small_Animals" ThisKey="Food_Id" OtherKey="Food_ID" Type="Small_Animal" />
+      <Association Name="Food_Cat" Member="Cats" ThisKey="Food_Id" OtherKey="Food_ID" Type="Cat" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Small_Animals" Member="Small_Animals">
+    <Type Name="Small_Animal">
+      <Column Name="Small_Animal_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Small_Animal_Name" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Size_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Adopted_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Room_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Food_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Personality_Color_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Shot_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Small_Animal_Room" Member="Rooms" ThisKey="Small_Animal_Id" OtherKey="Small_Animal_ID" Type="Room" />
+      <Association Name="Adopted_Status_Small_Animal" Member="Adopted_Status" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Adopted_Status" IsForeignKey="true" />
+      <Association Name="Food_Small_Animal" Member="Food" ThisKey="Food_ID" OtherKey="Food_Id" Type="Food" IsForeignKey="true" />
+      <Association Name="Gender_Small_Animal" Member="Gender" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Gender" IsForeignKey="true" />
+      <Association Name="Personality_Small_Animal" Member="Personality" ThisKey="Personality_Color_ID" OtherKey="Personality_ID" Type="Personality" IsForeignKey="true" />
+      <Association Name="Shot_Small_Animal" Member="Shot" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Shot" IsForeignKey="true" />
+      <Association Name="Size_Small_Animal" Member="Size" ThisKey="Size_ID" OtherKey="Size_Id" Type="Size" IsForeignKey="true" />
+      <Association Name="Room_Small_Animal" Member="Room" ThisKey="Room_ID" OtherKey="Room_ID" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Animals.Cats" Member="Cats">
+    <Type Name="Cat">
+      <Column Name="Cat_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cat_Name" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Size_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Adopted_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Room_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Food_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Personality_Color_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Shot_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Cat_Room" Member="Rooms" ThisKey="Cat_Id" OtherKey="Cat_ID" Type="Room" />
+      <Association Name="Adopted_Status_Cat" Member="Adopted_Status" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Adopted_Status" IsForeignKey="true" />
+      <Association Name="Food_Cat" Member="Food" ThisKey="Food_ID" OtherKey="Food_Id" Type="Food" IsForeignKey="true" />
+      <Association Name="Gender_Cat" Member="Gender" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Gender" IsForeignKey="true" />
+      <Association Name="Personality_Cat" Member="Personality" ThisKey="Personality_Color_ID" OtherKey="Personality_ID" Type="Personality" IsForeignKey="true" />
+      <Association Name="Shot_Cat" Member="Shot" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Shot" IsForeignKey="true" />
+      <Association Name="Size_Cat" Member="Size" ThisKey="Size_ID" OtherKey="Size_Id" Type="Size" IsForeignKey="true" />
+      <Association Name="Room_Cat" Member="Room" ThisKey="Room_ID" OtherKey="Room_ID" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adopters.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="Adopter_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Adopter_Name" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Adopter_Profile" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Association Name="Customer_Phone" Member="Phones" ThisKey="Adopter_ID" OtherKey="Adopter_ID" Type="Phone" />
+      <Association Name="Gender1_Customer" Member="Gender1" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Gender1" IsForeignKey="true" />
+      <Association Name="Phone_Customer" Member="Phone" ThisKey="Phone_ID" OtherKey="Phone_ID" Type="Phone" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adopters.Genders" Member="Gender1s">
+    <Type Name="Gender1">
+      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Gender1_Customer" Member="Customers" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Customer" />
+    </Type>
+  </Table>
+  <Table Name="Adopters.Phone" Member="Phones">
+    <Type Name="Phone">
+      <Column Name="Phone_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Phone_Number" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Adopter_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Phone_Customer" Member="Customers" ThisKey="Phone_ID" OtherKey="Phone_ID" Type="Customer" />
+      <Association Name="Customer_Phone" Member="Customer" ThisKey="Adopter_ID" OtherKey="Adopter_ID" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="Animals.Rooms" Member="Rooms">
@@ -29,49 +157,11 @@
       <Column Name="Cat_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Small_Animal_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Room_Dog" Member="Dogs" ThisKey="Room_ID" OtherKey="Room_ID" Type="Dog" />
+      <Association Name="Room_Small_Animal" Member="Small_Animals" ThisKey="Room_ID" OtherKey="Room_ID" Type="Small_Animal" />
+      <Association Name="Room_Cat" Member="Cats" ThisKey="Room_ID" OtherKey="Room_ID" Type="Cat" />
+      <Association Name="Cat_Room" Member="Cat" ThisKey="Cat_ID" OtherKey="Cat_Id" Type="Cat" IsForeignKey="true" />
       <Association Name="Dog_Room" Member="Dog" ThisKey="Dog_ID" OtherKey="Dog_Id" Type="Dog" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="Animals.Gender" Member="Genders">
-    <Type Name="Gender">
-      <Column Name="Gender_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Gender" Member="Gender1" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Association Name="Gender_Dog" Member="Dogs" ThisKey="Gender_ID" OtherKey="Gender_ID" Type="Dog" />
-    </Type>
-  </Table>
-  <Table Name="Animals.Personalities" Member="Personalities">
-    <Type Name="Personality">
-      <Column Name="Personality_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Color" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Association Name="Personality_Dog" Member="Dogs" ThisKey="Personality_ID" OtherKey="Personality_Color_ID" Type="Dog" />
-    </Type>
-  </Table>
-  <Table Name="Animals.Shots" Member="Shots">
-    <Type Name="Shot">
-      <Column Name="Shot_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Shot_Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="Shot_Dog" Member="Dogs" ThisKey="Shot_ID" OtherKey="Shot_ID" Type="Dog" />
-    </Type>
-  </Table>
-  <Table Name="Animals.Sizes" Member="Sizes">
-    <Type Name="Size">
-      <Column Name="Size_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Size" Member="Size1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="Size_Dog" Member="Dogs" ThisKey="Size_Id" OtherKey="Size_ID" Type="Dog" />
-    </Type>
-  </Table>
-  <Table Name="Animals.Adopted_Status" Member="Adopted_Status">
-    <Type Name="Adopted_Status">
-      <Column Name="Adopted_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Adopted_Status" Member="Adopted_Status1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="Adopted_Status_Dog" Member="Dogs" ThisKey="Adopted_ID" OtherKey="Adopted_ID" Type="Dog" />
-    </Type>
-  </Table>
-  <Table Name="Animals.Food" Member="Foods">
-    <Type Name="Food">
-      <Column Name="Food_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Food_Type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Food_Dog" Member="Dogs" ThisKey="Food_Id" OtherKey="Food_ID" Type="Dog" />
+      <Association Name="Small_Animal_Room" Member="Small_Animal" ThisKey="Small_Animal_ID" OtherKey="Small_Animal_Id" Type="Small_Animal" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

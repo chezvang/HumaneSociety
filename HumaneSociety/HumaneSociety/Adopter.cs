@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Linq;
 
 namespace HumaneSociety
 {
@@ -200,8 +201,6 @@ namespace HumaneSociety
                     break;
             }
         }
-<<<<<<< HEAD
-=======
         
         public void AskAdopt()
         {
@@ -235,20 +234,19 @@ namespace HumaneSociety
         public void Write(string userName, string userAge, string userGender, string userEmail, string userPhone, string userProfile)
         {
             DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
-            Test objWrite = new Test(); //change 'Test' to User table name
-            objWrite.Name = userName; //change to match table column
+            Customer objWrite = new Customer(); //change 'Test' to User table name
+            objWrite.Adopter_Name = userName; //change to match table column
             objWrite.Age = userAge; //change to match table column
-            objWrite.Gender = userGender; //change to match table column
+            objWrite.Gender_ID = Convert.ToInt32(userGender); //change to match table column
             objWrite.Email = userEmail; //change to match table column
-            objWrite.Phone = userPhone; //change to match table column
-            objWrite.Profile = userProfile; //change to match table column
-            theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite); //change to match table name
+            //objWrite.Phone_ID = userPhone; //change to match table column
+            objWrite.Adopter_Profile = userProfile; //change to match table column
+            theHumaneSociety.GetTable<Customer>().InsertOnSubmit(objWrite); //change to match table name
             theHumaneSociety.SubmitChanges();
 
             Console.WriteLine("Adding Profile");
             Console.ReadKey();
         }
->>>>>>> ea7d2fb78cc490a002e58d5a58013849ee833a62
 
         //public void Read(SqlConnection conn)
         //{

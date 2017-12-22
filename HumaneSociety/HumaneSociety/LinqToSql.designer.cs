@@ -33,9 +33,6 @@ namespace HumaneSociety
     partial void InsertDog(Dog instance);
     partial void UpdateDog(Dog instance);
     partial void DeleteDog(Dog instance);
-    partial void InsertRoom(Room instance);
-    partial void UpdateRoom(Room instance);
-    partial void DeleteRoom(Room instance);
     partial void InsertGender(Gender instance);
     partial void UpdateGender(Gender instance);
     partial void DeleteGender(Gender instance);
@@ -54,6 +51,24 @@ namespace HumaneSociety
     partial void InsertFood(Food instance);
     partial void UpdateFood(Food instance);
     partial void DeleteFood(Food instance);
+    partial void InsertSmall_Animal(Small_Animal instance);
+    partial void UpdateSmall_Animal(Small_Animal instance);
+    partial void DeleteSmall_Animal(Small_Animal instance);
+    partial void InsertCat(Cat instance);
+    partial void UpdateCat(Cat instance);
+    partial void DeleteCat(Cat instance);
+    partial void InsertCustomer(Customer instance);
+    partial void UpdateCustomer(Customer instance);
+    partial void DeleteCustomer(Customer instance);
+    partial void InsertGender1(Gender1 instance);
+    partial void UpdateGender1(Gender1 instance);
+    partial void DeleteGender1(Gender1 instance);
+    partial void InsertPhone(Phone instance);
+    partial void UpdatePhone(Phone instance);
+    partial void DeletePhone(Phone instance);
+    partial void InsertRoom(Room instance);
+    partial void UpdateRoom(Room instance);
+    partial void DeleteRoom(Room instance);
     #endregion
 		
 		public LinqToSqlDataContext() : 
@@ -91,14 +106,6 @@ namespace HumaneSociety
 			get
 			{
 				return this.GetTable<Dog>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Room> Rooms
-		{
-			get
-			{
-				return this.GetTable<Room>();
 			}
 		}
 		
@@ -149,6 +156,54 @@ namespace HumaneSociety
 				return this.GetTable<Food>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this.GetTable<Small_Animal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cat> Cats
+		{
+			get
+			{
+				return this.GetTable<Cat>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer> Customers
+		{
+			get
+			{
+				return this.GetTable<Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Gender1> Gender1s
+		{
+			get
+			{
+				return this.GetTable<Gender1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Phone> Phones
+		{
+			get
+			{
+				return this.GetTable<Phone>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Room> Rooms
+		{
+			get
+			{
+				return this.GetTable<Room>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Dogs")]
@@ -179,8 +234,6 @@ namespace HumaneSociety
 		
 		private EntitySet<Room> _Rooms;
 		
-		private EntityRef<Room> _Room;
-		
 		private EntityRef<Gender> _Gender;
 		
 		private EntityRef<Personality> _Personality;
@@ -192,6 +245,8 @@ namespace HumaneSociety
 		private EntityRef<Adopted_Status> _Adopted_Status;
 		
 		private EntityRef<Food> _Food;
+		
+		private EntityRef<Room> _Room;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -222,13 +277,13 @@ namespace HumaneSociety
 		public Dog()
 		{
 			this._Rooms = new EntitySet<Room>(new Action<Room>(this.attach_Rooms), new Action<Room>(this.detach_Rooms));
-			this._Room = default(EntityRef<Room>);
 			this._Gender = default(EntityRef<Gender>);
 			this._Personality = default(EntityRef<Personality>);
 			this._Shot = default(EntityRef<Shot>);
 			this._Size = default(EntityRef<Size>);
 			this._Adopted_Status = default(EntityRef<Adopted_Status>);
 			this._Food = default(EntityRef<Food>);
+			this._Room = default(EntityRef<Room>);
 			OnCreated();
 		}
 		
@@ -473,40 +528,6 @@ namespace HumaneSociety
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Dog", Storage="_Room", ThisKey="Room_ID", OtherKey="Room_ID", IsForeignKey=true)]
-		public Room Room
-		{
-			get
-			{
-				return this._Room.Entity;
-			}
-			set
-			{
-				Room previousValue = this._Room.Entity;
-				if (((previousValue != value) 
-							|| (this._Room.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Room.Entity = null;
-						previousValue.Dogs.Remove(this);
-					}
-					this._Room.Entity = value;
-					if ((value != null))
-					{
-						value.Dogs.Add(this);
-						this._Room_ID = value.Room_ID;
-					}
-					else
-					{
-						this._Room_ID = default(int);
-					}
-					this.SendPropertyChanged("Room");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Dog", Storage="_Gender", ThisKey="Gender_ID", OtherKey="Gender_ID", IsForeignKey=true)]
 		public Gender Gender
 		{
@@ -711,6 +732,40 @@ namespace HumaneSociety
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Dog", Storage="_Room", ThisKey="Room_ID", OtherKey="Room_ID", IsForeignKey=true)]
+		public Room Room
+		{
+			get
+			{
+				return this._Room.Entity;
+			}
+			set
+			{
+				Room previousValue = this._Room.Entity;
+				if (((previousValue != value) 
+							|| (this._Room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Room.Entity = null;
+						previousValue.Dogs.Remove(this);
+					}
+					this._Room.Entity = value;
+					if ((value != null))
+					{
+						value.Dogs.Add(this);
+						this._Room_ID = value.Room_ID;
+					}
+					else
+					{
+						this._Room_ID = default(int);
+					}
+					this.SendPropertyChanged("Room");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -744,6 +799,2821 @@ namespace HumaneSociety
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Gender")]
+	public partial class Gender : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Gender_ID;
+		
+		private string _Gender1;
+		
+		private EntitySet<Dog> _Dogs;
+		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGender_IDChanging(int value);
+    partial void OnGender_IDChanged();
+    partial void OnGender1Changing(string value);
+    partial void OnGender1Changed();
+    #endregion
+		
+		public Gender()
+		{
+			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Gender_ID
+		{
+			get
+			{
+				return this._Gender_ID;
+			}
+			set
+			{
+				if ((this._Gender_ID != value))
+				{
+					this.OnGender_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Gender_ID = value;
+					this.SendPropertyChanged("Gender_ID");
+					this.OnGender_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Gender", Storage="_Gender1", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Gender1
+		{
+			get
+			{
+				return this._Gender1;
+			}
+			set
+			{
+				if ((this._Gender1 != value))
+				{
+					this.OnGender1Changing(value);
+					this.SendPropertyChanging();
+					this._Gender1 = value;
+					this.SendPropertyChanged("Gender1");
+					this.OnGender1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Dog", Storage="_Dogs", ThisKey="Gender_ID", OtherKey="Gender_ID")]
+		public EntitySet<Dog> Dogs
+		{
+			get
+			{
+				return this._Dogs;
+			}
+			set
+			{
+				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Small_Animal", Storage="_Small_Animals", ThisKey="Gender_ID", OtherKey="Gender_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Cat", Storage="_Cats", ThisKey="Gender_ID", OtherKey="Gender_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender = this;
+		}
+		
+		private void detach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender = null;
+		}
+		
+		private void attach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender = this;
+		}
+		
+		private void detach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender = null;
+		}
+		
+		private void attach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender = this;
+		}
+		
+		private void detach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Personalities")]
+	public partial class Personality : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Personality_ID;
+		
+		private string _Color;
+		
+		private EntitySet<Dog> _Dogs;
+		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPersonality_IDChanging(int value);
+    partial void OnPersonality_IDChanged();
+    partial void OnColorChanging(string value);
+    partial void OnColorChanged();
+    #endregion
+		
+		public Personality()
+		{
+			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Personality_ID
+		{
+			get
+			{
+				return this._Personality_ID;
+			}
+			set
+			{
+				if ((this._Personality_ID != value))
+				{
+					this.OnPersonality_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Personality_ID = value;
+					this.SendPropertyChanged("Personality_ID");
+					this.OnPersonality_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this.OnColorChanging(value);
+					this.SendPropertyChanging();
+					this._Color = value;
+					this.SendPropertyChanged("Color");
+					this.OnColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personality_Dog", Storage="_Dogs", ThisKey="Personality_ID", OtherKey="Personality_Color_ID")]
+		public EntitySet<Dog> Dogs
+		{
+			get
+			{
+				return this._Dogs;
+			}
+			set
+			{
+				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personality_Small_Animal", Storage="_Small_Animals", ThisKey="Personality_ID", OtherKey="Personality_Color_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personality_Cat", Storage="_Cats", ThisKey="Personality_ID", OtherKey="Personality_Color_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Personality = this;
+		}
+		
+		private void detach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Personality = null;
+		}
+		
+		private void attach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Personality = this;
+		}
+		
+		private void detach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Personality = null;
+		}
+		
+		private void attach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Personality = this;
+		}
+		
+		private void detach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Personality = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Shots")]
+	public partial class Shot : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Shot_ID;
+		
+		private string _Shot_Status;
+		
+		private EntitySet<Dog> _Dogs;
+		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnShot_IDChanging(int value);
+    partial void OnShot_IDChanged();
+    partial void OnShot_StatusChanging(string value);
+    partial void OnShot_StatusChanged();
+    #endregion
+		
+		public Shot()
+		{
+			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shot_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Shot_ID
+		{
+			get
+			{
+				return this._Shot_ID;
+			}
+			set
+			{
+				if ((this._Shot_ID != value))
+				{
+					this.OnShot_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Shot_ID = value;
+					this.SendPropertyChanged("Shot_ID");
+					this.OnShot_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shot_Status", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Shot_Status
+		{
+			get
+			{
+				return this._Shot_Status;
+			}
+			set
+			{
+				if ((this._Shot_Status != value))
+				{
+					this.OnShot_StatusChanging(value);
+					this.SendPropertyChanging();
+					this._Shot_Status = value;
+					this.SendPropertyChanged("Shot_Status");
+					this.OnShot_StatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shot_Dog", Storage="_Dogs", ThisKey="Shot_ID", OtherKey="Shot_ID")]
+		public EntitySet<Dog> Dogs
+		{
+			get
+			{
+				return this._Dogs;
+			}
+			set
+			{
+				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shot_Small_Animal", Storage="_Small_Animals", ThisKey="Shot_ID", OtherKey="Shot_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shot_Cat", Storage="_Cats", ThisKey="Shot_ID", OtherKey="Shot_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Shot = this;
+		}
+		
+		private void detach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Shot = null;
+		}
+		
+		private void attach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Shot = this;
+		}
+		
+		private void detach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Shot = null;
+		}
+		
+		private void attach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Shot = this;
+		}
+		
+		private void detach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Shot = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Sizes")]
+	public partial class Size : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Size_Id;
+		
+		private string _Size1;
+		
+		private EntitySet<Dog> _Dogs;
+		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSize_IdChanging(int value);
+    partial void OnSize_IdChanged();
+    partial void OnSize1Changing(string value);
+    partial void OnSize1Changed();
+    #endregion
+		
+		public Size()
+		{
+			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Size_Id
+		{
+			get
+			{
+				return this._Size_Id;
+			}
+			set
+			{
+				if ((this._Size_Id != value))
+				{
+					this.OnSize_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Size_Id = value;
+					this.SendPropertyChanged("Size_Id");
+					this.OnSize_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Size", Storage="_Size1", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Size1
+		{
+			get
+			{
+				return this._Size1;
+			}
+			set
+			{
+				if ((this._Size1 != value))
+				{
+					this.OnSize1Changing(value);
+					this.SendPropertyChanging();
+					this._Size1 = value;
+					this.SendPropertyChanged("Size1");
+					this.OnSize1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Size_Dog", Storage="_Dogs", ThisKey="Size_Id", OtherKey="Size_ID")]
+		public EntitySet<Dog> Dogs
+		{
+			get
+			{
+				return this._Dogs;
+			}
+			set
+			{
+				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Size_Small_Animal", Storage="_Small_Animals", ThisKey="Size_Id", OtherKey="Size_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Size_Cat", Storage="_Cats", ThisKey="Size_Id", OtherKey="Size_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Size = this;
+		}
+		
+		private void detach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Size = null;
+		}
+		
+		private void attach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Size = this;
+		}
+		
+		private void detach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Size = null;
+		}
+		
+		private void attach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Size = this;
+		}
+		
+		private void detach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Size = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Adopted_Status")]
+	public partial class Adopted_Status : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Adopted_ID;
+		
+		private string _Adopted_Status1;
+		
+		private EntitySet<Dog> _Dogs;
+		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAdopted_IDChanging(int value);
+    partial void OnAdopted_IDChanged();
+    partial void OnAdopted_Status1Changing(string value);
+    partial void OnAdopted_Status1Changed();
+    #endregion
+		
+		public Adopted_Status()
+		{
+			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Adopted_ID
+		{
+			get
+			{
+				return this._Adopted_ID;
+			}
+			set
+			{
+				if ((this._Adopted_ID != value))
+				{
+					this.OnAdopted_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Adopted_ID = value;
+					this.SendPropertyChanged("Adopted_ID");
+					this.OnAdopted_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Adopted_Status", Storage="_Adopted_Status1", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Adopted_Status1
+		{
+			get
+			{
+				return this._Adopted_Status1;
+			}
+			set
+			{
+				if ((this._Adopted_Status1 != value))
+				{
+					this.OnAdopted_Status1Changing(value);
+					this.SendPropertyChanging();
+					this._Adopted_Status1 = value;
+					this.SendPropertyChanged("Adopted_Status1");
+					this.OnAdopted_Status1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Adopted_Status_Dog", Storage="_Dogs", ThisKey="Adopted_ID", OtherKey="Adopted_ID")]
+		public EntitySet<Dog> Dogs
+		{
+			get
+			{
+				return this._Dogs;
+			}
+			set
+			{
+				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Adopted_Status_Small_Animal", Storage="_Small_Animals", ThisKey="Adopted_ID", OtherKey="Adopted_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Adopted_Status_Cat", Storage="_Cats", ThisKey="Adopted_ID", OtherKey="Adopted_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Adopted_Status = this;
+		}
+		
+		private void detach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Adopted_Status = null;
+		}
+		
+		private void attach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Adopted_Status = this;
+		}
+		
+		private void detach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Adopted_Status = null;
+		}
+		
+		private void attach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Adopted_Status = this;
+		}
+		
+		private void detach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Adopted_Status = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Food")]
+	public partial class Food : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Food_Id;
+		
+		private string _Food_Type;
+		
+		private EntitySet<Dog> _Dogs;
+		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFood_IdChanging(int value);
+    partial void OnFood_IdChanged();
+    partial void OnFood_TypeChanging(string value);
+    partial void OnFood_TypeChanged();
+    #endregion
+		
+		public Food()
+		{
+			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Food_Id
+		{
+			get
+			{
+				return this._Food_Id;
+			}
+			set
+			{
+				if ((this._Food_Id != value))
+				{
+					this.OnFood_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Food_Id = value;
+					this.SendPropertyChanged("Food_Id");
+					this.OnFood_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_Type", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Food_Type
+		{
+			get
+			{
+				return this._Food_Type;
+			}
+			set
+			{
+				if ((this._Food_Type != value))
+				{
+					this.OnFood_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._Food_Type = value;
+					this.SendPropertyChanged("Food_Type");
+					this.OnFood_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Dog", Storage="_Dogs", ThisKey="Food_Id", OtherKey="Food_ID")]
+		public EntitySet<Dog> Dogs
+		{
+			get
+			{
+				return this._Dogs;
+			}
+			set
+			{
+				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Small_Animal", Storage="_Small_Animals", ThisKey="Food_Id", OtherKey="Food_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Cat", Storage="_Cats", ThisKey="Food_Id", OtherKey="Food_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food = this;
+		}
+		
+		private void detach_Dogs(Dog entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food = null;
+		}
+		
+		private void attach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food = this;
+		}
+		
+		private void detach_Small_Animals(Small_Animal entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food = null;
+		}
+		
+		private void attach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food = this;
+		}
+		
+		private void detach_Cats(Cat entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Small_Animals")]
+	public partial class Small_Animal : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Small_Animal_Id;
+		
+		private string _Small_Animal_Name;
+		
+		private int _Gender_ID;
+		
+		private string _Age;
+		
+		private int _Size_ID;
+		
+		private int _Adopted_ID;
+		
+		private int _Room_ID;
+		
+		private int _Food_ID;
+		
+		private int _Personality_Color_ID;
+		
+		private System.Nullable<int> _Shot_ID;
+		
+		private EntitySet<Room> _Rooms;
+		
+		private EntityRef<Adopted_Status> _Adopted_Status;
+		
+		private EntityRef<Food> _Food;
+		
+		private EntityRef<Gender> _Gender;
+		
+		private EntityRef<Personality> _Personality;
+		
+		private EntityRef<Shot> _Shot;
+		
+		private EntityRef<Size> _Size;
+		
+		private EntityRef<Room> _Room;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSmall_Animal_IdChanging(int value);
+    partial void OnSmall_Animal_IdChanged();
+    partial void OnSmall_Animal_NameChanging(string value);
+    partial void OnSmall_Animal_NameChanged();
+    partial void OnGender_IDChanging(int value);
+    partial void OnGender_IDChanged();
+    partial void OnAgeChanging(string value);
+    partial void OnAgeChanged();
+    partial void OnSize_IDChanging(int value);
+    partial void OnSize_IDChanged();
+    partial void OnAdopted_IDChanging(int value);
+    partial void OnAdopted_IDChanged();
+    partial void OnRoom_IDChanging(int value);
+    partial void OnRoom_IDChanged();
+    partial void OnFood_IDChanging(int value);
+    partial void OnFood_IDChanged();
+    partial void OnPersonality_Color_IDChanging(int value);
+    partial void OnPersonality_Color_IDChanged();
+    partial void OnShot_IDChanging(System.Nullable<int> value);
+    partial void OnShot_IDChanged();
+    #endregion
+		
+		public Small_Animal()
+		{
+			this._Rooms = new EntitySet<Room>(new Action<Room>(this.attach_Rooms), new Action<Room>(this.detach_Rooms));
+			this._Adopted_Status = default(EntityRef<Adopted_Status>);
+			this._Food = default(EntityRef<Food>);
+			this._Gender = default(EntityRef<Gender>);
+			this._Personality = default(EntityRef<Personality>);
+			this._Shot = default(EntityRef<Shot>);
+			this._Size = default(EntityRef<Size>);
+			this._Room = default(EntityRef<Room>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Small_Animal_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Small_Animal_Id
+		{
+			get
+			{
+				return this._Small_Animal_Id;
+			}
+			set
+			{
+				if ((this._Small_Animal_Id != value))
+				{
+					this.OnSmall_Animal_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Small_Animal_Id = value;
+					this.SendPropertyChanged("Small_Animal_Id");
+					this.OnSmall_Animal_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Small_Animal_Name", DbType="VarChar(80)")]
+		public string Small_Animal_Name
+		{
+			get
+			{
+				return this._Small_Animal_Name;
+			}
+			set
+			{
+				if ((this._Small_Animal_Name != value))
+				{
+					this.OnSmall_Animal_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Small_Animal_Name = value;
+					this.SendPropertyChanged("Small_Animal_Name");
+					this.OnSmall_Animal_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", DbType="Int NOT NULL")]
+		public int Gender_ID
+		{
+			get
+			{
+				return this._Gender_ID;
+			}
+			set
+			{
+				if ((this._Gender_ID != value))
+				{
+					if (this._Gender.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGender_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Gender_ID = value;
+					this.SendPropertyChanged("Gender_ID");
+					this.OnGender_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", DbType="VarChar(5)")]
+		public string Age
+		{
+			get
+			{
+				return this._Age;
+			}
+			set
+			{
+				if ((this._Age != value))
+				{
+					this.OnAgeChanging(value);
+					this.SendPropertyChanging();
+					this._Age = value;
+					this.SendPropertyChanged("Age");
+					this.OnAgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size_ID", DbType="Int NOT NULL")]
+		public int Size_ID
+		{
+			get
+			{
+				return this._Size_ID;
+			}
+			set
+			{
+				if ((this._Size_ID != value))
+				{
+					if (this._Size.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSize_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Size_ID = value;
+					this.SendPropertyChanged("Size_ID");
+					this.OnSize_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted_ID", DbType="Int NOT NULL")]
+		public int Adopted_ID
+		{
+			get
+			{
+				return this._Adopted_ID;
+			}
+			set
+			{
+				if ((this._Adopted_ID != value))
+				{
+					if (this._Adopted_Status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAdopted_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Adopted_ID = value;
+					this.SendPropertyChanged("Adopted_ID");
+					this.OnAdopted_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Room_ID", DbType="Int NOT NULL")]
+		public int Room_ID
+		{
+			get
+			{
+				return this._Room_ID;
+			}
+			set
+			{
+				if ((this._Room_ID != value))
+				{
+					if (this._Room.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoom_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Room_ID = value;
+					this.SendPropertyChanged("Room_ID");
+					this.OnRoom_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_ID", DbType="Int NOT NULL")]
+		public int Food_ID
+		{
+			get
+			{
+				return this._Food_ID;
+			}
+			set
+			{
+				if ((this._Food_ID != value))
+				{
+					if (this._Food.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFood_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Food_ID = value;
+					this.SendPropertyChanged("Food_ID");
+					this.OnFood_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality_Color_ID", DbType="Int NOT NULL")]
+		public int Personality_Color_ID
+		{
+			get
+			{
+				return this._Personality_Color_ID;
+			}
+			set
+			{
+				if ((this._Personality_Color_ID != value))
+				{
+					if (this._Personality.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPersonality_Color_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Personality_Color_ID = value;
+					this.SendPropertyChanged("Personality_Color_ID");
+					this.OnPersonality_Color_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shot_ID", DbType="Int")]
+		public System.Nullable<int> Shot_ID
+		{
+			get
+			{
+				return this._Shot_ID;
+			}
+			set
+			{
+				if ((this._Shot_ID != value))
+				{
+					if (this._Shot.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnShot_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Shot_ID = value;
+					this.SendPropertyChanged("Shot_ID");
+					this.OnShot_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Small_Animal_Room", Storage="_Rooms", ThisKey="Small_Animal_Id", OtherKey="Small_Animal_ID")]
+		public EntitySet<Room> Rooms
+		{
+			get
+			{
+				return this._Rooms;
+			}
+			set
+			{
+				this._Rooms.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Adopted_Status_Small_Animal", Storage="_Adopted_Status", ThisKey="Adopted_ID", OtherKey="Adopted_ID", IsForeignKey=true)]
+		public Adopted_Status Adopted_Status
+		{
+			get
+			{
+				return this._Adopted_Status.Entity;
+			}
+			set
+			{
+				Adopted_Status previousValue = this._Adopted_Status.Entity;
+				if (((previousValue != value) 
+							|| (this._Adopted_Status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Adopted_Status.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Adopted_Status.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Adopted_ID = value.Adopted_ID;
+					}
+					else
+					{
+						this._Adopted_ID = default(int);
+					}
+					this.SendPropertyChanged("Adopted_Status");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Small_Animal", Storage="_Food", ThisKey="Food_ID", OtherKey="Food_Id", IsForeignKey=true)]
+		public Food Food
+		{
+			get
+			{
+				return this._Food.Entity;
+			}
+			set
+			{
+				Food previousValue = this._Food.Entity;
+				if (((previousValue != value) 
+							|| (this._Food.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Food.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Food.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Food_ID = value.Food_Id;
+					}
+					else
+					{
+						this._Food_ID = default(int);
+					}
+					this.SendPropertyChanged("Food");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Small_Animal", Storage="_Gender", ThisKey="Gender_ID", OtherKey="Gender_ID", IsForeignKey=true)]
+		public Gender Gender
+		{
+			get
+			{
+				return this._Gender.Entity;
+			}
+			set
+			{
+				Gender previousValue = this._Gender.Entity;
+				if (((previousValue != value) 
+							|| (this._Gender.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gender.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Gender.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Gender_ID = value.Gender_ID;
+					}
+					else
+					{
+						this._Gender_ID = default(int);
+					}
+					this.SendPropertyChanged("Gender");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personality_Small_Animal", Storage="_Personality", ThisKey="Personality_Color_ID", OtherKey="Personality_ID", IsForeignKey=true)]
+		public Personality Personality
+		{
+			get
+			{
+				return this._Personality.Entity;
+			}
+			set
+			{
+				Personality previousValue = this._Personality.Entity;
+				if (((previousValue != value) 
+							|| (this._Personality.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Personality.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Personality.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Personality_Color_ID = value.Personality_ID;
+					}
+					else
+					{
+						this._Personality_Color_ID = default(int);
+					}
+					this.SendPropertyChanged("Personality");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shot_Small_Animal", Storage="_Shot", ThisKey="Shot_ID", OtherKey="Shot_ID", IsForeignKey=true)]
+		public Shot Shot
+		{
+			get
+			{
+				return this._Shot.Entity;
+			}
+			set
+			{
+				Shot previousValue = this._Shot.Entity;
+				if (((previousValue != value) 
+							|| (this._Shot.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Shot.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Shot.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Shot_ID = value.Shot_ID;
+					}
+					else
+					{
+						this._Shot_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Shot");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Size_Small_Animal", Storage="_Size", ThisKey="Size_ID", OtherKey="Size_Id", IsForeignKey=true)]
+		public Size Size
+		{
+			get
+			{
+				return this._Size.Entity;
+			}
+			set
+			{
+				Size previousValue = this._Size.Entity;
+				if (((previousValue != value) 
+							|| (this._Size.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Size.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Size.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Size_ID = value.Size_Id;
+					}
+					else
+					{
+						this._Size_ID = default(int);
+					}
+					this.SendPropertyChanged("Size");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Small_Animal", Storage="_Room", ThisKey="Room_ID", OtherKey="Room_ID", IsForeignKey=true)]
+		public Room Room
+		{
+			get
+			{
+				return this._Room.Entity;
+			}
+			set
+			{
+				Room previousValue = this._Room.Entity;
+				if (((previousValue != value) 
+							|| (this._Room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Room.Entity = null;
+						previousValue.Small_Animals.Remove(this);
+					}
+					this._Room.Entity = value;
+					if ((value != null))
+					{
+						value.Small_Animals.Add(this);
+						this._Room_ID = value.Room_ID;
+					}
+					else
+					{
+						this._Room_ID = default(int);
+					}
+					this.SendPropertyChanged("Room");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Rooms(Room entity)
+		{
+			this.SendPropertyChanging();
+			entity.Small_Animal = this;
+		}
+		
+		private void detach_Rooms(Room entity)
+		{
+			this.SendPropertyChanging();
+			entity.Small_Animal = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Cats")]
+	public partial class Cat : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Cat_Id;
+		
+		private string _Cat_Name;
+		
+		private int _Gender_ID;
+		
+		private string _Age;
+		
+		private int _Size_ID;
+		
+		private int _Adopted_ID;
+		
+		private int _Room_ID;
+		
+		private int _Food_ID;
+		
+		private int _Personality_Color_ID;
+		
+		private System.Nullable<int> _Shot_ID;
+		
+		private EntitySet<Room> _Rooms;
+		
+		private EntityRef<Adopted_Status> _Adopted_Status;
+		
+		private EntityRef<Food> _Food;
+		
+		private EntityRef<Gender> _Gender;
+		
+		private EntityRef<Personality> _Personality;
+		
+		private EntityRef<Shot> _Shot;
+		
+		private EntityRef<Size> _Size;
+		
+		private EntityRef<Room> _Room;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCat_IdChanging(int value);
+    partial void OnCat_IdChanged();
+    partial void OnCat_NameChanging(string value);
+    partial void OnCat_NameChanged();
+    partial void OnGender_IDChanging(int value);
+    partial void OnGender_IDChanged();
+    partial void OnAgeChanging(string value);
+    partial void OnAgeChanged();
+    partial void OnSize_IDChanging(int value);
+    partial void OnSize_IDChanged();
+    partial void OnAdopted_IDChanging(int value);
+    partial void OnAdopted_IDChanged();
+    partial void OnRoom_IDChanging(int value);
+    partial void OnRoom_IDChanged();
+    partial void OnFood_IDChanging(int value);
+    partial void OnFood_IDChanged();
+    partial void OnPersonality_Color_IDChanging(int value);
+    partial void OnPersonality_Color_IDChanged();
+    partial void OnShot_IDChanging(System.Nullable<int> value);
+    partial void OnShot_IDChanged();
+    #endregion
+		
+		public Cat()
+		{
+			this._Rooms = new EntitySet<Room>(new Action<Room>(this.attach_Rooms), new Action<Room>(this.detach_Rooms));
+			this._Adopted_Status = default(EntityRef<Adopted_Status>);
+			this._Food = default(EntityRef<Food>);
+			this._Gender = default(EntityRef<Gender>);
+			this._Personality = default(EntityRef<Personality>);
+			this._Shot = default(EntityRef<Shot>);
+			this._Size = default(EntityRef<Size>);
+			this._Room = default(EntityRef<Room>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cat_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Cat_Id
+		{
+			get
+			{
+				return this._Cat_Id;
+			}
+			set
+			{
+				if ((this._Cat_Id != value))
+				{
+					this.OnCat_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cat_Id = value;
+					this.SendPropertyChanged("Cat_Id");
+					this.OnCat_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cat_Name", DbType="VarChar(80)")]
+		public string Cat_Name
+		{
+			get
+			{
+				return this._Cat_Name;
+			}
+			set
+			{
+				if ((this._Cat_Name != value))
+				{
+					this.OnCat_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Cat_Name = value;
+					this.SendPropertyChanged("Cat_Name");
+					this.OnCat_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", DbType="Int NOT NULL")]
+		public int Gender_ID
+		{
+			get
+			{
+				return this._Gender_ID;
+			}
+			set
+			{
+				if ((this._Gender_ID != value))
+				{
+					if (this._Gender.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGender_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Gender_ID = value;
+					this.SendPropertyChanged("Gender_ID");
+					this.OnGender_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", DbType="VarChar(5)")]
+		public string Age
+		{
+			get
+			{
+				return this._Age;
+			}
+			set
+			{
+				if ((this._Age != value))
+				{
+					this.OnAgeChanging(value);
+					this.SendPropertyChanging();
+					this._Age = value;
+					this.SendPropertyChanged("Age");
+					this.OnAgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size_ID", DbType="Int NOT NULL")]
+		public int Size_ID
+		{
+			get
+			{
+				return this._Size_ID;
+			}
+			set
+			{
+				if ((this._Size_ID != value))
+				{
+					if (this._Size.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSize_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Size_ID = value;
+					this.SendPropertyChanged("Size_ID");
+					this.OnSize_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted_ID", DbType="Int NOT NULL")]
+		public int Adopted_ID
+		{
+			get
+			{
+				return this._Adopted_ID;
+			}
+			set
+			{
+				if ((this._Adopted_ID != value))
+				{
+					if (this._Adopted_Status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAdopted_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Adopted_ID = value;
+					this.SendPropertyChanged("Adopted_ID");
+					this.OnAdopted_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Room_ID", DbType="Int NOT NULL")]
+		public int Room_ID
+		{
+			get
+			{
+				return this._Room_ID;
+			}
+			set
+			{
+				if ((this._Room_ID != value))
+				{
+					if (this._Room.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoom_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Room_ID = value;
+					this.SendPropertyChanged("Room_ID");
+					this.OnRoom_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_ID", DbType="Int NOT NULL")]
+		public int Food_ID
+		{
+			get
+			{
+				return this._Food_ID;
+			}
+			set
+			{
+				if ((this._Food_ID != value))
+				{
+					if (this._Food.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFood_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Food_ID = value;
+					this.SendPropertyChanged("Food_ID");
+					this.OnFood_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality_Color_ID", DbType="Int NOT NULL")]
+		public int Personality_Color_ID
+		{
+			get
+			{
+				return this._Personality_Color_ID;
+			}
+			set
+			{
+				if ((this._Personality_Color_ID != value))
+				{
+					if (this._Personality.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPersonality_Color_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Personality_Color_ID = value;
+					this.SendPropertyChanged("Personality_Color_ID");
+					this.OnPersonality_Color_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shot_ID", DbType="Int")]
+		public System.Nullable<int> Shot_ID
+		{
+			get
+			{
+				return this._Shot_ID;
+			}
+			set
+			{
+				if ((this._Shot_ID != value))
+				{
+					if (this._Shot.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnShot_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Shot_ID = value;
+					this.SendPropertyChanged("Shot_ID");
+					this.OnShot_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cat_Room", Storage="_Rooms", ThisKey="Cat_Id", OtherKey="Cat_ID")]
+		public EntitySet<Room> Rooms
+		{
+			get
+			{
+				return this._Rooms;
+			}
+			set
+			{
+				this._Rooms.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Adopted_Status_Cat", Storage="_Adopted_Status", ThisKey="Adopted_ID", OtherKey="Adopted_ID", IsForeignKey=true)]
+		public Adopted_Status Adopted_Status
+		{
+			get
+			{
+				return this._Adopted_Status.Entity;
+			}
+			set
+			{
+				Adopted_Status previousValue = this._Adopted_Status.Entity;
+				if (((previousValue != value) 
+							|| (this._Adopted_Status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Adopted_Status.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Adopted_Status.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Adopted_ID = value.Adopted_ID;
+					}
+					else
+					{
+						this._Adopted_ID = default(int);
+					}
+					this.SendPropertyChanged("Adopted_Status");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Cat", Storage="_Food", ThisKey="Food_ID", OtherKey="Food_Id", IsForeignKey=true)]
+		public Food Food
+		{
+			get
+			{
+				return this._Food.Entity;
+			}
+			set
+			{
+				Food previousValue = this._Food.Entity;
+				if (((previousValue != value) 
+							|| (this._Food.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Food.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Food.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Food_ID = value.Food_Id;
+					}
+					else
+					{
+						this._Food_ID = default(int);
+					}
+					this.SendPropertyChanged("Food");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Cat", Storage="_Gender", ThisKey="Gender_ID", OtherKey="Gender_ID", IsForeignKey=true)]
+		public Gender Gender
+		{
+			get
+			{
+				return this._Gender.Entity;
+			}
+			set
+			{
+				Gender previousValue = this._Gender.Entity;
+				if (((previousValue != value) 
+							|| (this._Gender.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gender.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Gender.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Gender_ID = value.Gender_ID;
+					}
+					else
+					{
+						this._Gender_ID = default(int);
+					}
+					this.SendPropertyChanged("Gender");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personality_Cat", Storage="_Personality", ThisKey="Personality_Color_ID", OtherKey="Personality_ID", IsForeignKey=true)]
+		public Personality Personality
+		{
+			get
+			{
+				return this._Personality.Entity;
+			}
+			set
+			{
+				Personality previousValue = this._Personality.Entity;
+				if (((previousValue != value) 
+							|| (this._Personality.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Personality.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Personality.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Personality_Color_ID = value.Personality_ID;
+					}
+					else
+					{
+						this._Personality_Color_ID = default(int);
+					}
+					this.SendPropertyChanged("Personality");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shot_Cat", Storage="_Shot", ThisKey="Shot_ID", OtherKey="Shot_ID", IsForeignKey=true)]
+		public Shot Shot
+		{
+			get
+			{
+				return this._Shot.Entity;
+			}
+			set
+			{
+				Shot previousValue = this._Shot.Entity;
+				if (((previousValue != value) 
+							|| (this._Shot.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Shot.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Shot.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Shot_ID = value.Shot_ID;
+					}
+					else
+					{
+						this._Shot_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Shot");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Size_Cat", Storage="_Size", ThisKey="Size_ID", OtherKey="Size_Id", IsForeignKey=true)]
+		public Size Size
+		{
+			get
+			{
+				return this._Size.Entity;
+			}
+			set
+			{
+				Size previousValue = this._Size.Entity;
+				if (((previousValue != value) 
+							|| (this._Size.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Size.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Size.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Size_ID = value.Size_Id;
+					}
+					else
+					{
+						this._Size_ID = default(int);
+					}
+					this.SendPropertyChanged("Size");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Cat", Storage="_Room", ThisKey="Room_ID", OtherKey="Room_ID", IsForeignKey=true)]
+		public Room Room
+		{
+			get
+			{
+				return this._Room.Entity;
+			}
+			set
+			{
+				Room previousValue = this._Room.Entity;
+				if (((previousValue != value) 
+							|| (this._Room.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Room.Entity = null;
+						previousValue.Cats.Remove(this);
+					}
+					this._Room.Entity = value;
+					if ((value != null))
+					{
+						value.Cats.Add(this);
+						this._Room_ID = value.Room_ID;
+					}
+					else
+					{
+						this._Room_ID = default(int);
+					}
+					this.SendPropertyChanged("Room");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Rooms(Room entity)
+		{
+			this.SendPropertyChanging();
+			entity.Cat = this;
+		}
+		
+		private void detach_Rooms(Room entity)
+		{
+			this.SendPropertyChanging();
+			entity.Cat = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Adopters.Customers")]
+	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Adopter_ID;
+		
+		private string _Adopter_Name;
+		
+		private string _Age;
+		
+		private int _Gender_ID;
+		
+		private string _Email;
+		
+		private int _Phone_ID;
+		
+		private string _Adopter_Profile;
+		
+		private EntitySet<Phone> _Phones;
+		
+		private EntityRef<Gender1> _Gender1;
+		
+		private EntityRef<Phone> _Phone;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAdopter_IDChanging(int value);
+    partial void OnAdopter_IDChanged();
+    partial void OnAdopter_NameChanging(string value);
+    partial void OnAdopter_NameChanged();
+    partial void OnAgeChanging(string value);
+    partial void OnAgeChanged();
+    partial void OnGender_IDChanging(int value);
+    partial void OnGender_IDChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPhone_IDChanging(int value);
+    partial void OnPhone_IDChanged();
+    partial void OnAdopter_ProfileChanging(string value);
+    partial void OnAdopter_ProfileChanged();
+    #endregion
+		
+		public Customer()
+		{
+			this._Phones = new EntitySet<Phone>(new Action<Phone>(this.attach_Phones), new Action<Phone>(this.detach_Phones));
+			this._Gender1 = default(EntityRef<Gender1>);
+			this._Phone = default(EntityRef<Phone>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopter_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Adopter_ID
+		{
+			get
+			{
+				return this._Adopter_ID;
+			}
+			set
+			{
+				if ((this._Adopter_ID != value))
+				{
+					this.OnAdopter_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Adopter_ID = value;
+					this.SendPropertyChanged("Adopter_ID");
+					this.OnAdopter_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopter_Name", DbType="VarChar(70) NOT NULL", CanBeNull=false)]
+		public string Adopter_Name
+		{
+			get
+			{
+				return this._Adopter_Name;
+			}
+			set
+			{
+				if ((this._Adopter_Name != value))
+				{
+					this.OnAdopter_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Adopter_Name = value;
+					this.SendPropertyChanged("Adopter_Name");
+					this.OnAdopter_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", DbType="VarChar(3) NOT NULL", CanBeNull=false)]
+		public string Age
+		{
+			get
+			{
+				return this._Age;
+			}
+			set
+			{
+				if ((this._Age != value))
+				{
+					this.OnAgeChanging(value);
+					this.SendPropertyChanging();
+					this._Age = value;
+					this.SendPropertyChanged("Age");
+					this.OnAgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", DbType="Int NOT NULL")]
+		public int Gender_ID
+		{
+			get
+			{
+				return this._Gender_ID;
+			}
+			set
+			{
+				if ((this._Gender_ID != value))
+				{
+					if (this._Gender1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGender_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Gender_ID = value;
+					this.SendPropertyChanged("Gender_ID");
+					this.OnGender_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(70) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone_ID", DbType="Int NOT NULL")]
+		public int Phone_ID
+		{
+			get
+			{
+				return this._Phone_ID;
+			}
+			set
+			{
+				if ((this._Phone_ID != value))
+				{
+					if (this._Phone.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPhone_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Phone_ID = value;
+					this.SendPropertyChanged("Phone_ID");
+					this.OnPhone_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopter_Profile", DbType="VarChar(1000)")]
+		public string Adopter_Profile
+		{
+			get
+			{
+				return this._Adopter_Profile;
+			}
+			set
+			{
+				if ((this._Adopter_Profile != value))
+				{
+					this.OnAdopter_ProfileChanging(value);
+					this.SendPropertyChanging();
+					this._Adopter_Profile = value;
+					this.SendPropertyChanged("Adopter_Profile");
+					this.OnAdopter_ProfileChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Phone", Storage="_Phones", ThisKey="Adopter_ID", OtherKey="Adopter_ID")]
+		public EntitySet<Phone> Phones
+		{
+			get
+			{
+				return this._Phones;
+			}
+			set
+			{
+				this._Phones.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender1_Customer", Storage="_Gender1", ThisKey="Gender_ID", OtherKey="Gender_ID", IsForeignKey=true)]
+		public Gender1 Gender1
+		{
+			get
+			{
+				return this._Gender1.Entity;
+			}
+			set
+			{
+				Gender1 previousValue = this._Gender1.Entity;
+				if (((previousValue != value) 
+							|| (this._Gender1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gender1.Entity = null;
+						previousValue.Customers.Remove(this);
+					}
+					this._Gender1.Entity = value;
+					if ((value != null))
+					{
+						value.Customers.Add(this);
+						this._Gender_ID = value.Gender_ID;
+					}
+					else
+					{
+						this._Gender_ID = default(int);
+					}
+					this.SendPropertyChanged("Gender1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Phone_Customer", Storage="_Phone", ThisKey="Phone_ID", OtherKey="Phone_ID", IsForeignKey=true)]
+		public Phone Phone
+		{
+			get
+			{
+				return this._Phone.Entity;
+			}
+			set
+			{
+				Phone previousValue = this._Phone.Entity;
+				if (((previousValue != value) 
+							|| (this._Phone.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Phone.Entity = null;
+						previousValue.Customers.Remove(this);
+					}
+					this._Phone.Entity = value;
+					if ((value != null))
+					{
+						value.Customers.Add(this);
+						this._Phone_ID = value.Phone_ID;
+					}
+					else
+					{
+						this._Phone_ID = default(int);
+					}
+					this.SendPropertyChanged("Phone");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Phones(Phone entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = this;
+		}
+		
+		private void detach_Phones(Phone entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Adopters.Genders")]
+	public partial class Gender1 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Gender_ID;
+		
+		private string _Gender;
+		
+		private EntitySet<Customer> _Customers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGender_IDChanging(int value);
+    partial void OnGender_IDChanged();
+    partial void OnGenderChanging(string value);
+    partial void OnGenderChanged();
+    #endregion
+		
+		public Gender1()
+		{
+			this._Customers = new EntitySet<Customer>(new Action<Customer>(this.attach_Customers), new Action<Customer>(this.detach_Customers));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Gender_ID
+		{
+			get
+			{
+				return this._Gender_ID;
+			}
+			set
+			{
+				if ((this._Gender_ID != value))
+				{
+					this.OnGender_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Gender_ID = value;
+					this.SendPropertyChanged("Gender_ID");
+					this.OnGender_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this.OnGenderChanging(value);
+					this.SendPropertyChanging();
+					this._Gender = value;
+					this.SendPropertyChanged("Gender");
+					this.OnGenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender1_Customer", Storage="_Customers", ThisKey="Gender_ID", OtherKey="Gender_ID")]
+		public EntitySet<Customer> Customers
+		{
+			get
+			{
+				return this._Customers;
+			}
+			set
+			{
+				this._Customers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender1 = this;
+		}
+		
+		private void detach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gender1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Adopters.Phone")]
+	public partial class Phone : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Phone_ID;
+		
+		private string _Phone_Number;
+		
+		private System.Nullable<int> _Adopter_ID;
+		
+		private EntitySet<Customer> _Customers;
+		
+		private EntityRef<Customer> _Customer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPhone_IDChanging(int value);
+    partial void OnPhone_IDChanged();
+    partial void OnPhone_NumberChanging(string value);
+    partial void OnPhone_NumberChanged();
+    partial void OnAdopter_IDChanging(System.Nullable<int> value);
+    partial void OnAdopter_IDChanged();
+    #endregion
+		
+		public Phone()
+		{
+			this._Customers = new EntitySet<Customer>(new Action<Customer>(this.attach_Customers), new Action<Customer>(this.detach_Customers));
+			this._Customer = default(EntityRef<Customer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Phone_ID
+		{
+			get
+			{
+				return this._Phone_ID;
+			}
+			set
+			{
+				if ((this._Phone_ID != value))
+				{
+					this.OnPhone_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Phone_ID = value;
+					this.SendPropertyChanged("Phone_ID");
+					this.OnPhone_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone_Number", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string Phone_Number
+		{
+			get
+			{
+				return this._Phone_Number;
+			}
+			set
+			{
+				if ((this._Phone_Number != value))
+				{
+					this.OnPhone_NumberChanging(value);
+					this.SendPropertyChanging();
+					this._Phone_Number = value;
+					this.SendPropertyChanged("Phone_Number");
+					this.OnPhone_NumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopter_ID", DbType="Int")]
+		public System.Nullable<int> Adopter_ID
+		{
+			get
+			{
+				return this._Adopter_ID;
+			}
+			set
+			{
+				if ((this._Adopter_ID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAdopter_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Adopter_ID = value;
+					this.SendPropertyChanged("Adopter_ID");
+					this.OnAdopter_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Phone_Customer", Storage="_Customers", ThisKey="Phone_ID", OtherKey="Phone_ID")]
+		public EntitySet<Customer> Customers
+		{
+			get
+			{
+				return this._Customers;
+			}
+			set
+			{
+				this._Customers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Phone", Storage="_Customer", ThisKey="Adopter_ID", OtherKey="Adopter_ID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Phones.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Phones.Add(this);
+						this._Adopter_ID = value.Adopter_ID;
+					}
+					else
+					{
+						this._Adopter_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Phone = this;
+		}
+		
+		private void detach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Phone = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Rooms")]
 	public partial class Room : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -760,7 +3630,15 @@ namespace HumaneSociety
 		
 		private EntitySet<Dog> _Dogs;
 		
+		private EntitySet<Small_Animal> _Small_Animals;
+		
+		private EntitySet<Cat> _Cats;
+		
+		private EntityRef<Cat> _Cat;
+		
 		private EntityRef<Dog> _Dog;
+		
+		private EntityRef<Small_Animal> _Small_Animal;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -779,7 +3657,11 @@ namespace HumaneSociety
 		public Room()
 		{
 			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
+			this._Small_Animals = new EntitySet<Small_Animal>(new Action<Small_Animal>(this.attach_Small_Animals), new Action<Small_Animal>(this.detach_Small_Animals));
+			this._Cats = new EntitySet<Cat>(new Action<Cat>(this.attach_Cats), new Action<Cat>(this.detach_Cats));
+			this._Cat = default(EntityRef<Cat>);
 			this._Dog = default(EntityRef<Dog>);
+			this._Small_Animal = default(EntityRef<Small_Animal>);
 			OnCreated();
 		}
 		
@@ -838,6 +3720,10 @@ namespace HumaneSociety
 			{
 				if ((this._Cat_ID != value))
 				{
+					if (this._Cat.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnCat_IDChanging(value);
 					this.SendPropertyChanging();
 					this._Cat_ID = value;
@@ -858,6 +3744,10 @@ namespace HumaneSociety
 			{
 				if ((this._Small_Animal_ID != value))
 				{
+					if (this._Small_Animal.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnSmall_Animal_IDChanging(value);
 					this.SendPropertyChanging();
 					this._Small_Animal_ID = value;
@@ -877,6 +3767,66 @@ namespace HumaneSociety
 			set
 			{
 				this._Dogs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Small_Animal", Storage="_Small_Animals", ThisKey="Room_ID", OtherKey="Room_ID")]
+		public EntitySet<Small_Animal> Small_Animals
+		{
+			get
+			{
+				return this._Small_Animals;
+			}
+			set
+			{
+				this._Small_Animals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Cat", Storage="_Cats", ThisKey="Room_ID", OtherKey="Room_ID")]
+		public EntitySet<Cat> Cats
+		{
+			get
+			{
+				return this._Cats;
+			}
+			set
+			{
+				this._Cats.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cat_Room", Storage="_Cat", ThisKey="Cat_ID", OtherKey="Cat_Id", IsForeignKey=true)]
+		public Cat Cat
+		{
+			get
+			{
+				return this._Cat.Entity;
+			}
+			set
+			{
+				Cat previousValue = this._Cat.Entity;
+				if (((previousValue != value) 
+							|| (this._Cat.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Cat.Entity = null;
+						previousValue.Rooms.Remove(this);
+					}
+					this._Cat.Entity = value;
+					if ((value != null))
+					{
+						value.Rooms.Add(this);
+						this._Cat_ID = value.Cat_Id;
+					}
+					else
+					{
+						this._Cat_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Cat");
+				}
 			}
 		}
 		
@@ -914,6 +3864,40 @@ namespace HumaneSociety
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Small_Animal_Room", Storage="_Small_Animal", ThisKey="Small_Animal_ID", OtherKey="Small_Animal_Id", IsForeignKey=true)]
+		public Small_Animal Small_Animal
+		{
+			get
+			{
+				return this._Small_Animal.Entity;
+			}
+			set
+			{
+				Small_Animal previousValue = this._Small_Animal.Entity;
+				if (((previousValue != value) 
+							|| (this._Small_Animal.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Small_Animal.Entity = null;
+						previousValue.Rooms.Remove(this);
+					}
+					this._Small_Animal.Entity = value;
+					if ((value != null))
+					{
+						value.Rooms.Add(this);
+						this._Small_Animal_ID = value.Small_Animal_Id;
+					}
+					else
+					{
+						this._Small_Animal_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Small_Animal");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -945,689 +3929,29 @@ namespace HumaneSociety
 			this.SendPropertyChanging();
 			entity.Room = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Gender")]
-	public partial class Gender : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Gender_ID;
-		
-		private string _Gender1;
-		
-		private EntitySet<Dog> _Dogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGender_IDChanging(int value);
-    partial void OnGender_IDChanged();
-    partial void OnGender1Changing(string value);
-    partial void OnGender1Changed();
-    #endregion
-		
-		public Gender()
-		{
-			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Gender_ID
-		{
-			get
-			{
-				return this._Gender_ID;
-			}
-			set
-			{
-				if ((this._Gender_ID != value))
-				{
-					this.OnGender_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Gender_ID = value;
-					this.SendPropertyChanged("Gender_ID");
-					this.OnGender_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Gender", Storage="_Gender1", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Gender1
-		{
-			get
-			{
-				return this._Gender1;
-			}
-			set
-			{
-				if ((this._Gender1 != value))
-				{
-					this.OnGender1Changing(value);
-					this.SendPropertyChanging();
-					this._Gender1 = value;
-					this.SendPropertyChanged("Gender1");
-					this.OnGender1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gender_Dog", Storage="_Dogs", ThisKey="Gender_ID", OtherKey="Gender_ID")]
-		public EntitySet<Dog> Dogs
-		{
-			get
-			{
-				return this._Dogs;
-			}
-			set
-			{
-				this._Dogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Dogs(Dog entity)
+		private void attach_Small_Animals(Small_Animal entity)
 		{
 			this.SendPropertyChanging();
-			entity.Gender = this;
+			entity.Room = this;
 		}
 		
-		private void detach_Dogs(Dog entity)
+		private void detach_Small_Animals(Small_Animal entity)
 		{
 			this.SendPropertyChanging();
-			entity.Gender = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Personalities")]
-	public partial class Personality : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Personality_ID;
-		
-		private string _Color;
-		
-		private EntitySet<Dog> _Dogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPersonality_IDChanging(int value);
-    partial void OnPersonality_IDChanged();
-    partial void OnColorChanging(string value);
-    partial void OnColorChanged();
-    #endregion
-		
-		public Personality()
-		{
-			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
-			OnCreated();
+			entity.Room = null;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Personality_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Personality_ID
-		{
-			get
-			{
-				return this._Personality_ID;
-			}
-			set
-			{
-				if ((this._Personality_ID != value))
-				{
-					this.OnPersonality_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Personality_ID = value;
-					this.SendPropertyChanged("Personality_ID");
-					this.OnPersonality_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Color
-		{
-			get
-			{
-				return this._Color;
-			}
-			set
-			{
-				if ((this._Color != value))
-				{
-					this.OnColorChanging(value);
-					this.SendPropertyChanging();
-					this._Color = value;
-					this.SendPropertyChanged("Color");
-					this.OnColorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Personality_Dog", Storage="_Dogs", ThisKey="Personality_ID", OtherKey="Personality_Color_ID")]
-		public EntitySet<Dog> Dogs
-		{
-			get
-			{
-				return this._Dogs;
-			}
-			set
-			{
-				this._Dogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Dogs(Dog entity)
+		private void attach_Cats(Cat entity)
 		{
 			this.SendPropertyChanging();
-			entity.Personality = this;
+			entity.Room = this;
 		}
 		
-		private void detach_Dogs(Dog entity)
+		private void detach_Cats(Cat entity)
 		{
 			this.SendPropertyChanging();
-			entity.Personality = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Shots")]
-	public partial class Shot : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Shot_ID;
-		
-		private string _Shot_Status;
-		
-		private EntitySet<Dog> _Dogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnShot_IDChanging(int value);
-    partial void OnShot_IDChanged();
-    partial void OnShot_StatusChanging(string value);
-    partial void OnShot_StatusChanged();
-    #endregion
-		
-		public Shot()
-		{
-			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shot_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Shot_ID
-		{
-			get
-			{
-				return this._Shot_ID;
-			}
-			set
-			{
-				if ((this._Shot_ID != value))
-				{
-					this.OnShot_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Shot_ID = value;
-					this.SendPropertyChanged("Shot_ID");
-					this.OnShot_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shot_Status", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Shot_Status
-		{
-			get
-			{
-				return this._Shot_Status;
-			}
-			set
-			{
-				if ((this._Shot_Status != value))
-				{
-					this.OnShot_StatusChanging(value);
-					this.SendPropertyChanging();
-					this._Shot_Status = value;
-					this.SendPropertyChanged("Shot_Status");
-					this.OnShot_StatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shot_Dog", Storage="_Dogs", ThisKey="Shot_ID", OtherKey="Shot_ID")]
-		public EntitySet<Dog> Dogs
-		{
-			get
-			{
-				return this._Dogs;
-			}
-			set
-			{
-				this._Dogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Shot = this;
-		}
-		
-		private void detach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Shot = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Sizes")]
-	public partial class Size : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Size_Id;
-		
-		private string _Size1;
-		
-		private EntitySet<Dog> _Dogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSize_IdChanging(int value);
-    partial void OnSize_IdChanged();
-    partial void OnSize1Changing(string value);
-    partial void OnSize1Changed();
-    #endregion
-		
-		public Size()
-		{
-			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Size_Id
-		{
-			get
-			{
-				return this._Size_Id;
-			}
-			set
-			{
-				if ((this._Size_Id != value))
-				{
-					this.OnSize_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Size_Id = value;
-					this.SendPropertyChanged("Size_Id");
-					this.OnSize_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Size", Storage="_Size1", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Size1
-		{
-			get
-			{
-				return this._Size1;
-			}
-			set
-			{
-				if ((this._Size1 != value))
-				{
-					this.OnSize1Changing(value);
-					this.SendPropertyChanging();
-					this._Size1 = value;
-					this.SendPropertyChanged("Size1");
-					this.OnSize1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Size_Dog", Storage="_Dogs", ThisKey="Size_Id", OtherKey="Size_ID")]
-		public EntitySet<Dog> Dogs
-		{
-			get
-			{
-				return this._Dogs;
-			}
-			set
-			{
-				this._Dogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Size = this;
-		}
-		
-		private void detach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Size = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Adopted_Status")]
-	public partial class Adopted_Status : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Adopted_ID;
-		
-		private string _Adopted_Status1;
-		
-		private EntitySet<Dog> _Dogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAdopted_IDChanging(int value);
-    partial void OnAdopted_IDChanged();
-    partial void OnAdopted_Status1Changing(string value);
-    partial void OnAdopted_Status1Changed();
-    #endregion
-		
-		public Adopted_Status()
-		{
-			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adopted_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Adopted_ID
-		{
-			get
-			{
-				return this._Adopted_ID;
-			}
-			set
-			{
-				if ((this._Adopted_ID != value))
-				{
-					this.OnAdopted_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Adopted_ID = value;
-					this.SendPropertyChanged("Adopted_ID");
-					this.OnAdopted_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Adopted_Status", Storage="_Adopted_Status1", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Adopted_Status1
-		{
-			get
-			{
-				return this._Adopted_Status1;
-			}
-			set
-			{
-				if ((this._Adopted_Status1 != value))
-				{
-					this.OnAdopted_Status1Changing(value);
-					this.SendPropertyChanging();
-					this._Adopted_Status1 = value;
-					this.SendPropertyChanged("Adopted_Status1");
-					this.OnAdopted_Status1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Adopted_Status_Dog", Storage="_Dogs", ThisKey="Adopted_ID", OtherKey="Adopted_ID")]
-		public EntitySet<Dog> Dogs
-		{
-			get
-			{
-				return this._Dogs;
-			}
-			set
-			{
-				this._Dogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Adopted_Status = this;
-		}
-		
-		private void detach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Adopted_Status = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Animals.Food")]
-	public partial class Food : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Food_Id;
-		
-		private string _Food_Type;
-		
-		private EntitySet<Dog> _Dogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnFood_IdChanging(int value);
-    partial void OnFood_IdChanged();
-    partial void OnFood_TypeChanging(string value);
-    partial void OnFood_TypeChanged();
-    #endregion
-		
-		public Food()
-		{
-			this._Dogs = new EntitySet<Dog>(new Action<Dog>(this.attach_Dogs), new Action<Dog>(this.detach_Dogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Food_Id
-		{
-			get
-			{
-				return this._Food_Id;
-			}
-			set
-			{
-				if ((this._Food_Id != value))
-				{
-					this.OnFood_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Food_Id = value;
-					this.SendPropertyChanged("Food_Id");
-					this.OnFood_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_Type", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Food_Type
-		{
-			get
-			{
-				return this._Food_Type;
-			}
-			set
-			{
-				if ((this._Food_Type != value))
-				{
-					this.OnFood_TypeChanging(value);
-					this.SendPropertyChanging();
-					this._Food_Type = value;
-					this.SendPropertyChanged("Food_Type");
-					this.OnFood_TypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Dog", Storage="_Dogs", ThisKey="Food_Id", OtherKey="Food_ID")]
-		public EntitySet<Dog> Dogs
-		{
-			get
-			{
-				return this._Dogs;
-			}
-			set
-			{
-				this._Dogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Food = this;
-		}
-		
-		private void detach_Dogs(Dog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Food = null;
+			entity.Room = null;
 		}
 	}
 }
