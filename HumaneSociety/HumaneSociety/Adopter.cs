@@ -9,7 +9,6 @@ namespace HumaneSociety
     class Adopter
     {
         UserInterface ui = new UserInterface();
-        HumaneSocietyWallet wallet = new HumaneSocietyWallet();
 
         public void AdopterNewUserPrompt()
         {
@@ -64,8 +63,7 @@ namespace HumaneSociety
             write = ConfirmInput();
             if(write == true)
             {
-                Write(userName, userAge, userGender, userEmail, userPhone, userProfile);
-                //pass all answer variables into write method for SQL databsase
+                
                 AdopterMainMenu();
             }
                 AdopterNewUserPrompt();
@@ -185,7 +183,7 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    userInput = ui.GetSearchShots();
+                    userInput = ui.GetShots();
                     //pass referenceColumn to SQL read
                     break;
                 case "5":
@@ -202,51 +200,6 @@ namespace HumaneSociety
                     break;
             }
         }
-        
-        public void AskAdopt()
-        {
-            bool adopt = false;
-            Console.WriteLine("Do you want to adopt this pet?");
-            string option = Console.ReadLine();
-            adopt = ui.ConfirmInput();
-            if (adopt == false)
-            {
-                Console.WriteLine("You have choosen not to give this pet a home :( \nReturning to previous menu. (Press any key to continue)");
-                Console.ReadKey();
-                //return to previous menu, where am i coming from?
-            }
-            AdopterPayment();
-        }
-
-        public void AdopterPayment()
-        {
-            bool confirm = false;
-            int price = PetCostGenerator();
-            Console.WriteLine("This pet costs: $" + price + "\nDo you wish to purchase this pet?");
-        }
-
-        private int PetCostGenerator()
-        {
-            Random random = new Random();
-            int price = random.Next(99, 251);
-            return price;
-        }
-
-        //public void Write(string userName, string userAge, string userGender, string userEmail, string userPhone, string userProfile)
-        //{
-        //    DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
-        //    Test objWrite = new Test(); //change 'Test' to User table name
-        //    objWrite.Name = userName; //change to match table column
-        //    objWrite.Age = userAge; //change to match table column
-        //    objWrite.Gender = userGender; //change to match table column
-        //    objWrite.Email = userEmail; //change to match table column
-        //    objWrite.Phone = userPhone; //change to match table column
-        //    objWrite.Profile = userProfile; //change to match table column
-        //    theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite); //change to match table name
-        //    theHumaneSociety.SubmitChanges();
-        //    Console.WriteLine("Adding Profile");
-        //    Console.ReadKey();
-        //}
 
         //public void Read(SqlConnection conn)
         //{
