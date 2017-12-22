@@ -61,22 +61,22 @@ namespace HumaneSociety
             }
             return userInput;
         }
-        public string GetSpecies()
-        {
-            string userInput;
-            int maxCharacterLength = 80;
-            bool isInputValid = false;
-            Console.Clear();
-            Console.WriteLine("Please enter the species:");
-            userInput = GetUserInput();
-            isInputValid = ValidateUserInput(userInput, maxCharacterLength);
-            if (!isInputValid)
-            {
-                IncorrectInput();
-                GetSpecies();
-            }
-            return userInput;
-        }
+        //public string GetSpecies() //remove when confirmed no longer needed
+        //{
+        //    string userInput;
+        //    int maxCharacterLength = 80;
+        //    bool isInputValid = false;
+        //    Console.Clear();
+        //    Console.WriteLine("Please enter the species:");
+        //    userInput = GetUserInput();
+        //    isInputValid = ValidateUserInput(userInput, maxCharacterLength);
+        //    if (!isInputValid)
+        //    {
+        //        IncorrectInput();
+        //        GetSpecies();
+        //    }
+        //    return userInput;
+        //}
         public string GetGender()
         {
             bool isInputValid = false;
@@ -91,6 +91,33 @@ namespace HumaneSociety
             {
                 IncorrectInput();
                 GetGender();
+            }
+            return userInput;
+        }
+        public string ConvertGenderOption(string userInput) //for display purposes only
+        {
+            string gender;
+            if (userInput != "2")
+            {
+                gender = "Male";
+            }
+            gender = "Female";
+            return gender;
+        }
+        public string GetAdopted()
+        {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2" };
+            string userInput;
+            Console.Clear();
+            Console.WriteLine("Please enter the gender:");
+            Console.WriteLine("[1] Adopted \n[2] Not Adopted");
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetAdopted();
             }
             return userInput;
         }
@@ -126,6 +153,29 @@ namespace HumaneSociety
                 GetSize();
             }
             return userInput;
+        }
+        public string ConvertSizeOption(string userInput) //for display purposes only
+        {
+            switch(userInput)
+            {
+                case "1":
+                    userInput = "Extra Small";
+                    return userInput;
+                case "2":
+                    userInput = "Small";
+                    return userInput;
+                case "3":
+                    userInput = "Medium";
+                    return userInput;
+                case "4":
+                    userInput = "Large";
+                    return userInput;
+                case "5":
+                    userInput = "Extra Large";
+                    return userInput;
+                default:
+                    return userInput = "";
+            }
         }
         public string GetRoom()
         {
@@ -206,6 +256,40 @@ namespace HumaneSociety
             {
                 IncorrectInput();
                 GetProfile();
+            }
+            return userInput;
+        }
+        public string GetShots()
+        {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2", "3" };
+            string userInput;
+            Console.Clear();
+            Console.WriteLine("How do you want to search shots?:");
+            Console.WriteLine("[1] Has Shots \n[2] No Shots \n[3] All Shots");
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetSize();
+            }
+            return userInput;
+        }
+        public string GetFood()
+        {
+            bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2", "3" };
+            string userInput;
+            Console.Clear();
+            Console.WriteLine("Enter the type of food:");
+            Console.WriteLine("[1] Dog Food \n[2] Cat Food \n[3] Small Animal Food");
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetSize();
             }
             return userInput;
         }

@@ -17,25 +17,27 @@ namespace HumaneSociety
 
             //db.GetTable
 
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
+                conn.Open();
+                //humane.employee.Write(conn);
+            }
+
             HumaneSociety humane = new HumaneSociety();
-            //using (SqlConnection conn = new SqlConnection())
-            //{
-            //    conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
-            //    conn.Open();
-            //    //humane.employee.Write(conn);
-            //}
-            //humane.StartProgram();
+            
+            humane.StartProgram();
 
             //THE OTHER OTHER GOD CODE - ADD
-            DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
-            Test objTestAnimal = new Test();
-            objTestAnimal.Animal_Name = "Velguarder";
-            objTestAnimal.Color = "Purple";
-            objTestAnimal.Personality = "Vicious";
-            theHumaneSociety.GetTable<Test>().InsertOnSubmit(objTestAnimal);
-            theHumaneSociety.SubmitChanges();
-            Console.WriteLine("Adding in Velguarder!");
-            Console.ReadKey();
+            //DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+            //Test objTestAnimal = new Test();
+            //objTestAnimal.Animal_Name = "Velguarder";
+            //objTestAnimal.Color = "Purple";
+            //objTestAnimal.Personality = "Vicious";
+            //theHumaneSociety.GetTable<Test>().InsertOnSubmit(objTestAnimal);
+            //theHumaneSociety.SubmitChanges();
+            //Console.WriteLine("Adding in Velguarder!");
+            //Console.ReadKey();
 
             //THIS IS THE OTHER GOD CODE - UPDATE
             //DataContext theHumanSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");

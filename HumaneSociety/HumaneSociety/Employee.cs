@@ -28,7 +28,9 @@ namespace HumaneSociety
             switch(option)
             {
                 case "1":
-                    AddAnimal();
+                    string searchType = ConfirmAnimalType();
+                    Console.WriteLine("Searching for a " + searchType);
+                    AddAnimal(searchType);
                     break;
                 case "2":
                     ChooseAnimalTypeToSearch();
@@ -43,37 +45,73 @@ namespace HumaneSociety
             }
         }
 
-        public void AddAnimal()
+        public string ConfirmAnimalType()
         {
-              
+            Console.Clear();
+            Console.WriteLine("What kind of pet do you want to search for?");
+            Console.WriteLine("[1] Dog \n[2] Cat \n[3] Small Animal");
+            string option = Console.ReadLine();
+            string addType = GetDatabaseType(option);
+            return addType;
+        }
+
+        public string GetDatabaseType(string option)
+        {
+            switch(option)
+            {
+                case "1":
+                    option = "Animals.Dogs";
+                    return option;
+                case "2":
+                    option = "Animals.Cats";
+                    return option;
+                case "3":
+                    option = "Animals.Small_Animals";
+                    return option;
+                default:
+                    ui.IncorrectInput();
+                    ConfirmAnimalType();
+                    return option = "";
+            }
+        }
+
+        public void AddAnimal(string searchType)
+        {              
             string animalName = ui.GetAnimalName();
-            string species = ui.GetSpecies();
             string gender = ui.GetGender();
             string age = ui.GetAge();
+            string shots = ui.GetShots();
             string size = ui.GetSize();
+            string food = ui.GetFood();
             string room = ui.GetRoom();
+            string adopted = ui.GetAdopted();
             string personalityColor = ui.GetPersonalityColor();
 
-            DisplayInput(animalName, age, species, gender, size, room, personalityColor);
+            DisplayInput(animalName, age, gender, size, room, personalityColor, shots, food);
+            //Write(SqlConnection conn, animalName, gender, age, size, adopted, room, food, personalityColor); //write to SQL database
         }
 
         //for employee, AddAnimal Method
-        public void DisplayInput(string animalName, string age, string species, string gender, string size, string room, string personalityColor)
+        public void DisplayInput(string animalName, string age, string gender, string size, string room, string personalityColor, string shots, string food)
         {
-            bool write = false;
+            bool confirmWrite = false;
 
             Console.Clear();
-            Console.WriteLine("Name: " + animalName + "\nAge: " + age + "\nGender: " + gender + "\nSize: " + size + "\nPersonality Color: " + personalityColor);
-            write = ConfirmInput();
-            if (write == true)
+            //gender = ui.ConvertGenderOption(gender);
+            //size = ui.ConvertSizeOption(size);
+            Console.WriteLine("Name: " + animalName + "\nAge: " + age + "\nGender: " + gender + "\nShots: " + shots + "\nSize: " + size + "\nFood: " + food + "\nPersonality Color: " + personalityColor);
+            confirmWrite = ConfirmInput();
+            if (confirmWrite == true)
             {
                 //pass all answer variables into write method for SQL databsase
+                Console.WriteLine("Pet has been successfully added to the database! (Press any key to continue)");
+                Console.ReadKey();
                 EmployeeMainMenu();
             }
             EmployeeMainMenu();
         }
 
-        public bool ConfirmInput() //add to Employee AddAnimal method
+        public bool ConfirmInput()
         {
             bool write = false;
 
@@ -127,7 +165,7 @@ namespace HumaneSociety
                     EmployeeMainMenu();
                     break;
                 default:
-
+                    ui.IncorrectInput();
                     break;
 
             }
@@ -173,13 +211,13 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    //userInput =
-                    //ConductSearch(referenceTable, referenceColumn, userInput);
+                    userInput = ui.GetShots();
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "5":
                     referenceColumn = "Food";
-                    //userInput =
-                    //ConductSearch(referenceTable, referenceColumn, userInput);
+                    userInput = ui.GetFood();
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "6":
                     ChooseAnimalTypeToSearch();
@@ -202,6 +240,7 @@ namespace HumaneSociety
         //    {
         //        conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
         //        conn.Open();
+        //        //humane.employee.Write(conn);
         //    }
         //}
 
@@ -222,11 +261,22 @@ namespace HumaneSociety
             }
         }
 
-        public void Write(SqlConnection conn, string command)
+        public void Write(SqlConnection conn, string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor)
         {
-            //SqlCommand myCommand = new SqlCommand(commandString, conn);
-            SqlCommand myCommand = new SqlCommand(command, conn);
-            myCommand.ExecuteNonQuery();
+            DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+            Test objWrite = new Test();
+            objWrite.Animal_Name = animalName;
+            objWrite.Gender = gender;
+            objWrite.Age = age;
+            objWrite.Size = size;
+            objWrite.Adopted = adopted;
+            objWrite.Room = room;
+            objWrite.Food = food;
+            objWrite.Personality_Color = personalityColor;
+            theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite);
+            theHumaneSociety.SubmitChanges();
+            Console.WriteLine("Adding Pet");
+            Console.ReadKey();
 
         }
     }

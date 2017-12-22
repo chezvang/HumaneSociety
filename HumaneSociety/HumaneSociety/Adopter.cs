@@ -183,12 +183,12 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    //userInput = ui.GetShots();
+                    userInput = ui.GetShots();
                     //pass referenceColumn to SQL read
                     break;
                 case "5":
                     referenceColumn = "Food";
-                    //userInput = ui.GetFood();
+                    userInput = ui.GetFood();
                     //pass referenceColumn to SQL read
                     break;
                 case "6":
