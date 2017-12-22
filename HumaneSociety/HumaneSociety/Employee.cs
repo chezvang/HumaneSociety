@@ -245,11 +245,8 @@ namespace HumaneSociety
                 select d;
             foreach (var d in query)
             {
-                if (searchTrait == null)
-                {
-                    searchTrait = ResolveSearchTrait(d, referenceColumn);
-                }
-                if(searchTrait.ToString() == userInput)
+                searchTrait = ResolveSearchTrait(d, referenceColumn);
+                if (searchTrait.ToString() == userInput)
                 {
                     searchResults.Add(d);
                 }

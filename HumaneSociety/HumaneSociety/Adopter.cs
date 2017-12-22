@@ -147,7 +147,7 @@ namespace HumaneSociety
         {
             Console.Clear();
             Console.WriteLine("What trait would you like to search by?");
-            Console.WriteLine("[1] Name \n[2] Size \n[3] Room \n[4] Shots \n[5] Food \n[6] Return");
+            Console.WriteLine("[1] Name \n[2] Size \n[3] Shots \n[4] Food \n[5] Return");
             string option = Console.ReadLine();
             AdopterSearchByTraitsOptions(option, referenceTable);
         }
@@ -159,31 +159,26 @@ namespace HumaneSociety
             switch (option)
             {
                 case "1":
-                    referenceColumn = "Name";
+                    referenceColumn = "Animal_Name";
                     userInput = ui.GetAnimalName();
-                    //pass referenceColumn to SQL read
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "2":
                     referenceColumn = "Size";
                     userInput = ui.GetSize();
-                    //pass referenceColumn to SQL read
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "3":
-                    referenceColumn = "Room";
-                    userInput = ui.GetRoom();
-                    //pass referenceColumn to SQL read
-                    break;
-                case "4":
                     referenceColumn = "Shots";
                     userInput = ui.GetSearchShots();
-                    //pass referenceColumn to SQL read
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
-                case "5":
+                case "4":
                     referenceColumn = "Food";
                     userInput = ui.GetFood();
-                    //pass referenceColumn to SQL read
+                    ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
-                case "6":
+                case "5":
                     AdopterTypeToSearch();
                     break;
                 default:
@@ -192,7 +187,66 @@ namespace HumaneSociety
                     break;
             }
         }
-        
+        private void ConductSearch(string referenceTable, string referenceColumn, string userInput)
+        {
+            object searchTrait = null;
+            List<Dog> searchResults = new List<Dog>();
+            DataContext theHumanSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+            var query =
+                from d in theHumanSociety.GetTable<Dog>()
+                select d;
+            foreach (var d in query)
+            {
+                searchTrait = ResolveSearchTrait(d, referenceColumn);
+                if (searchTrait.ToString() == userInput)
+                {
+                    searchResults.Add(d);
+                }
+            }
+            MakeChoice(searchResults);
+        }
+
+        private object ResolveSearchTrait(Dog d, string referenceColumn)
+        {
+            object searchProperty = null;
+            List<string> traits = new List<string>() { "Animal_Name", "Size", "Room", "Shots", "Food" };
+            switch (referenceColumn)
+            {
+                case "Animal_Name":
+                    searchProperty = d.Animal_Name;
+                    return searchProperty;
+                case "Size":
+                    searchProperty = d.Size_ID;
+                    return searchProperty;
+                case "Room":
+                    searchProperty = d.Room_ID;
+                    return searchProperty;
+                case "Shots":
+                    searchProperty = d.Shot_ID;
+                    return searchProperty;
+                case "Food":
+                    searchProperty = d.Food_ID;
+                    return searchProperty;
+            }
+            return searchProperty;
+        }
+        private void MakeChoice(List<Dog> searchResults)
+        {
+            string userInput;
+            int optionsCounter = 1;
+            List<string> options = new List<string>();
+            Console.WriteLine("Search Results:");
+            for (int i = 0; i < searchResults.Count; i++)
+            {
+                Console.WriteLine("[" + optionsCounter.ToString() + "] " + searchResults[i].Animal_Name + "Gender: " + searchResults[i].Gender.Gender1 + "\nAge: " + searchResults[i].Age + "\nSize: " + searchResults[i].Size.Size1 + "\nAdopted Status: " + searchResults[i].Adopted_Status.Adopted_Status1 + "\nRoom: " + searchResults[i].Room.Room_ID + "\nFood type: " + searchResults[i].Food.Food_Type + "\nPersonality Color: " + searchResults[i].Personality.Color + "\nShot Status: " + searchResults[i].Shot.Shot_Status);
+            }
+            for (int j = 1; j <= searchResults.Count; j++)
+            {
+                options.Add(j.ToString());
+            }
+            userInput = ui.GetUserInput(options);
+        }
+
         public void AskAdopt()
         {
             bool adopt = false;
