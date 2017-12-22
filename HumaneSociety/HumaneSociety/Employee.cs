@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data.Linq;
 
 namespace HumaneSociety
 {
@@ -87,12 +88,12 @@ namespace HumaneSociety
             string adopted = ui.GetAdopted();
             string personalityColor = ui.GetPersonalityColor();
 
-            DisplayInput(animalName, age, gender, size, room, personalityColor, shots, food);
-            //Write(SqlConnection conn, animalName, gender, age, size, adopted, room, food, personalityColor); //write to SQL database
+            DisplayInput(animalName, age, gender, size, room, personalityColor, shots, food, adopted);
+            
         }
 
         //for employee, AddAnimal Method
-        public void DisplayInput(string animalName, string age, string gender, string size, string room, string personalityColor, string shots, string food)
+        public void DisplayInput(string animalName, string age, string gender, string size, string room, string personalityColor, string shots, string food, string adopted)
         {
             bool confirmWrite = false;
 
@@ -103,7 +104,7 @@ namespace HumaneSociety
             confirmWrite = ConfirmInput();
             if (confirmWrite == true)
             {
-                //pass all answer variables into write method for SQL databsase
+                Write(animalName, gender, age, size, adopted, room, food, personalityColor, shots); //write to SQL database
                 Console.WriteLine("Pet has been successfully added to the database! (Press any key to continue)");
                 Console.ReadKey();
                 EmployeeMainMenu();
@@ -229,9 +230,76 @@ namespace HumaneSociety
 
             }
         }
-        private void ConductSearch(string referenceTable, string referenceColumn, string userInput)
+        private void ConductSearch( string referenceTable, string referenceColumn, string userInput)
         {
+            object searchTrait = null;
+            List<Dog> searchResults = new List<Dog>();       
+            DataContext theHumanSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+            var query =
+                from d in theHumanSociety.GetTable<Dog>()
+                select d;
+            foreach (var d in query)
+            {
+                if (searchTrait == null)
+                {
+                    searchTrait = ResolveSearchTrait(d, referenceColumn);
+                }
+                if(searchTrait.ToString() == userInput)
+                {
+                    searchResults.Add(d);
+                }
+            }
+            MakeChoice(searchResults);            
+        }
+
+        private object ResolveSearchTrait(Dog d, string referenceColumn)
+        {
+            object searchProperty = null;
+            List<string> traits = new List<string>() { "Animal_Name", "Size", "Room", "Shots", "Food" };
+            switch (referenceColumn)
+            {
+                case "Animal_Name":
+                    searchProperty = d.Animal_Name;
+                    return searchProperty;                    
+                case "Size":
+                    searchProperty = d.Size_ID;
+                    return searchProperty;
+                case "Room":
+                    searchProperty = d.Room_ID;
+                    return searchProperty;
+                case "Shots":
+                    searchProperty = d.Shot_ID;
+                    return searchProperty;
+                case "Food":
+                    searchProperty = d.Food_ID;
+                    return searchProperty;
+            }
+            return searchProperty;
+        }
+        private void MakeChoice(List<Dog> searchResults)
+        {
+<<<<<<< HEAD
             
+=======
+            string userInput;
+            int optionsCounter = 1;
+            List<string> options = new List<string>();
+            Console.WriteLine("Search Results:");
+            for (int i = 0; i < searchResults.Count; i++)
+            {
+                Console.WriteLine("["+ optionsCounter.ToString() +"] " + searchResults[i].Animal_Name + " " + searchResults[i].Gender.Gender1 + " "
+                     + searchResults[i].Age + " " + searchResults[i].Size.Size1 + " " + searchResults[i].Adopted_Status.Adopted_Status1 + " "
+                     + searchResults[i].Room.Room_ID + " " + searchResults[i].Food.Food_Type + " " + searchResults[i].Personality.Color + " "
+                     + searchResults[i].Shot.Shot_Status);
+            }
+            for (int j = 1; j <= searchResults.Count; j++)
+            {
+                options.Add(j.ToString());
+            }
+            userInput = ui.GetUserInput(options);
+
+
+>>>>>>> dbc418ed5b8fd27f56fd453a076be7382ab9b0ff
         }
 
         //void ISqlConnector.OpenSqlConnection()
@@ -261,6 +329,7 @@ namespace HumaneSociety
         //    }
         //}
 
+<<<<<<< HEAD
         //public void Write(SqlConnection conn, string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor)
         //{
         //    DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
@@ -286,6 +355,25 @@ namespace HumaneSociety
                 (from d in theHumanSociety.GetTable<Test_Animal>()
                  where d.Animal_Name == "Bud"
                  select d).First();
+=======
+        public void Write(string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor, string shots)
+        {
+            DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+            Dog objWrite = new Dog();          
+            objWrite.Animal_Name = animalName;         
+            objWrite.Gender_ID = Convert.ToInt32(gender);
+            objWrite.Age = age;
+            objWrite.Size_ID = Convert.ToInt32(size);
+            objWrite.Adopted_ID = Convert.ToInt32(adopted);
+            objWrite.Room_ID = Convert.ToInt32(room);
+            objWrite.Food_ID = Convert.ToInt32(food);
+            objWrite.Personality_Color_ID = Convert.ToInt32(personalityColor);
+            objWrite.Shot_ID = Convert.ToInt32(shots);
+            theHumaneSociety.GetTable<Dog>().InsertOnSubmit(objWrite);
+            theHumaneSociety.SubmitChanges();
+            Console.WriteLine("Adding Pet");
+            Console.ReadKey();
+>>>>>>> dbc418ed5b8fd27f56fd453a076be7382ab9b0ff
 
             query.Animal_Name = "Not Bud";
             Console.WriteLine(query.Animal_Name);

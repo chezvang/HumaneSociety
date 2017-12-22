@@ -25,7 +25,7 @@ namespace HumaneSociety
             }
 
             HumaneSociety humane = new HumaneSociety();
-            
+
             humane.StartProgram();
 
             //THE OTHER OTHER GOD CODE - ADD
@@ -51,15 +51,17 @@ namespace HumaneSociety
             Console.ReadLine();
 
 
+
+
             //THIS IS THE GOD CODE - READ
             //DataContext theHumanSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
             //var query =
-            //    from d in theHumanSociety.GetTable<Test_Animal>()
-            //    where d.Animal_Name == "Bud"
+            //    from d in theHumanSociety.GetTable<Dog>()
+            //    where d.Room_ID == 3 || d.Room_ID == 2
             //    select d;
             //foreach (var d in query)
             //{
-            //    Console.WriteLine(d.Color);
+            //    Console.WriteLine(d.Animal_Name + "" + d.Gender.Gender1);
             //}
             //Console.ReadLine();
 

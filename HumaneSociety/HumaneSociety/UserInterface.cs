@@ -263,6 +263,7 @@ namespace HumaneSociety
         {
             bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2" };
+<<<<<<< HEAD
             string userInput;
             Console.Clear();
             Console.WriteLine("Does this animal have their shots?:");
@@ -284,6 +285,12 @@ namespace HumaneSociety
             Console.Clear();
             Console.WriteLine("Does this animal have their shots?:");
             Console.WriteLine("[1] Has Shots \n[2] No Shots \n[3] All Shots");
+=======
+            string userInput;
+            Console.Clear();
+            Console.WriteLine("How do you want to search shots?:");
+            Console.WriteLine("[1] Has Shots \n[2] No Shots");
+>>>>>>> dbc418ed5b8fd27f56fd453a076be7382ab9b0ff
             userInput = GetUserInput(options);
             isInputValid = ValidateUserInput(options, userInput);
             if (!isInputValid)
