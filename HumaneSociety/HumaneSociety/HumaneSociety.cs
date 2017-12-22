@@ -10,6 +10,8 @@ namespace HumaneSociety
     {
         UserInterface ui = new UserInterface();
         Adopter adopter = new Adopter();
+        HumaneSocietyWallet wallet = new HumaneSocietyWallet();
+        //write bool check for wallet, if there is money in wallet, display *adoption pending*
        public Employee employee = new Employee();
 
         public void InitialPrompt()

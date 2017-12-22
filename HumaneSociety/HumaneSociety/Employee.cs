@@ -276,11 +276,8 @@ namespace HumaneSociety
             }
             return searchProperty;
         }
-        private void MakeChoice(List<Dog> searchResults)
+        private void MakeChoice(List<Dog> searchResults) //pretty this up
         {
-<<<<<<< HEAD
-            
-=======
             string userInput;
             int optionsCounter = 1;
             List<string> options = new List<string>();
@@ -297,9 +294,6 @@ namespace HumaneSociety
                 options.Add(j.ToString());
             }
             userInput = ui.GetUserInput(options);
-
-
->>>>>>> dbc418ed5b8fd27f56fd453a076be7382ab9b0ff
         }
 
         //void ISqlConnector.OpenSqlConnection()
@@ -329,7 +323,6 @@ namespace HumaneSociety
         //    }
         //}
 
-<<<<<<< HEAD
         //public void Write(SqlConnection conn, string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor)
         //{
         //    DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
@@ -355,7 +348,6 @@ namespace HumaneSociety
                 (from d in theHumanSociety.GetTable<Test_Animal>()
                  where d.Animal_Name == "Bud"
                  select d).First();
-=======
         public void Write(string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor, string shots)
         {
             DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
@@ -373,7 +365,6 @@ namespace HumaneSociety
             theHumaneSociety.SubmitChanges();
             Console.WriteLine("Adding Pet");
             Console.ReadKey();
->>>>>>> dbc418ed5b8fd27f56fd453a076be7382ab9b0ff
 
             query.Animal_Name = "Not Bud";
             Console.WriteLine(query.Animal_Name);
