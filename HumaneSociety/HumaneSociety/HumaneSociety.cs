@@ -9,16 +9,31 @@ namespace HumaneSociety
     class HumaneSociety
     {
         UserInterface ui = new UserInterface();
-        Adopter adopter = new Adopter();
+        public Adopter adopter = new Adopter();
+        public Employee employee = new Employee();
         HumaneSocietyWallet wallet = new HumaneSocietyWallet();
-        //write bool check for wallet, if there is money in wallet, display *adoption pending*
-       public Employee employee = new Employee();
+
 
         public void InitialPrompt()
         {
-            Console.WriteLine("Welcome to The Humane Society! \nChoose your path: \n[1] Employee \n[2] Adopter \n[3] Exit Program");
+            wallet.AddToWallet(0);
+            PendingAlert();
+            Console.WriteLine("Welcome to The Humane Society! \nChoose your path: \n[1] Employee \n[2] Adopter \n[3] Exit Program\n");
             string option = Console.ReadLine();
             InitialPromptOptions(option);
+        }
+
+        public void PendingAlert()
+        {
+            bool alert = wallet.WalletAlert();
+            if(alert == true)
+            {
+                Console.WriteLine("*There is a payment pending*\n");
+            }
+            else
+            {
+                Console.WriteLine("The Humane Society is currently broke.\n");
+            }
         }
 
         public void InitialPromptOptions(string option)

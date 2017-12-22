@@ -21,5 +21,14 @@ namespace HumaneSociety
             wallet = wallet += number;
             return wallet;
         }
+        public bool WalletAlert()
+        {
+            bool alert;
+            if(wallet > 0)
+            {
+                return alert = true;
+            }
+            return alert = false;
+        }
     }
 }

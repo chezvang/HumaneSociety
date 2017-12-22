@@ -19,7 +19,7 @@ namespace HumaneSociety
         {
             Console.Clear();
             Console.WriteLine("Welcome Employee of The Humane Society.\n\nWhat is on the agenda today?");
-            Console.WriteLine("[1] Add animal \n[2] Search animal \n[3] SSearch Adopter");
+            Console.WriteLine("[1] Add animal \n[2] Search animal \n[3] Search Adopter");
             string option = Console.ReadLine();
             EmployeeMenuOptions(option);
         }
@@ -92,24 +92,30 @@ namespace HumaneSociety
             
         }
 
-        //for employee, AddAnimal Method
         public void DisplayInput(string animalName, string age, string gender, string size, string room, string personalityColor, string shots, string food, string adopted)
         {
             bool confirmWrite = false;
 
             Console.Clear();
-            //gender = ui.ConvertGenderOption(gender);
-            //size = ui.ConvertSizeOption(size);
+            AnimalDisplayInput(animalName, age, gender, size, room, personalityColor, shots, food, adopted);
             Console.WriteLine("Name: " + animalName + "\nAge: " + age + "\nGender: " + gender + "\nShots: " + shots + "\nSize: " + size + "\nFood: " + food + "\nPersonality Color: " + personalityColor);
             confirmWrite = ConfirmInput();
             if (confirmWrite == true)
             {
-                Write(animalName, gender, age, size, adopted, room, food, personalityColor, shots); //write to SQL database
+                //Write(animalName, gender, age, size, adopted, room, food, personalityColor, shots); //write to SQL database
                 Console.WriteLine("Pet has been successfully added to the database! (Press any key to continue)");
                 Console.ReadKey();
                 EmployeeMainMenu();
             }
             EmployeeMainMenu();
+        }
+
+        public void AnimalDisplayInput(string animalName, string age, string gender, string size, string room, string personalityColor, string shots, string food, string adopted)
+        {
+            gender = ui.ConvertGenderOption(gender);
+            size = ui.ConvertSizeOption(size);
+            Console.Clear();
+            Console.WriteLine("Name: " + animalName + "\nAge: " + age + "\nGender: " + gender + "\nShots: " + shots + "\nSize: " + size + "\nFood: " + food + "\nPersonality Color: " + personalityColor);
         }
 
         public bool ConfirmInput()
@@ -167,8 +173,8 @@ namespace HumaneSociety
                     break;
                 default:
                     ui.IncorrectInput();
+                    ChooseAnimalTypeToSearch();
                     break;
-
             }
         }
         private void ChooseAnimalTraitToSearch(string referenceTable)
@@ -225,12 +231,11 @@ namespace HumaneSociety
                     break;                    
                 default:
                     ui.IncorrectInput();
+                    ChooseAnimalTraitToSearch(referenceTable);
                     break;
-                    //SELECT * FROM referenceTable WHERE referenceColumn=userInput
-
             }
         }
-        private void ConductSearch( string referenceTable, string referenceColumn, string userInput)
+        private void ConductSearch(string referenceTable, string referenceColumn, string userInput)
         {
             object searchTrait = null;
             List<Dog> searchResults = new List<Dog>();       
@@ -241,7 +246,7 @@ namespace HumaneSociety
             foreach (var d in query)
             {
                 searchTrait = ResolveSearchTrait(d, referenceColumn);
-                if(searchTrait.ToString() == userInput)
+                if (searchTrait.ToString() == userInput)
                 {
                     searchResults.Add(d);
                 }
@@ -273,7 +278,7 @@ namespace HumaneSociety
             }
             return searchProperty;
         }
-        private void MakeChoice(List<Dog> searchResults) //pretty this up
+        private void MakeChoice(List<Dog> searchResults)
         {
             string userInput;
             int optionsCounter = 1;
@@ -281,10 +286,7 @@ namespace HumaneSociety
             Console.WriteLine("Search Results:");
             for (int i = 0; i < searchResults.Count; i++)
             {
-                Console.WriteLine("["+ optionsCounter.ToString() +"] " + searchResults[i].Animal_Name + " " + searchResults[i].Gender.Gender1 + " "
-                     + searchResults[i].Age + " " + searchResults[i].Size.Size1 + " " + searchResults[i].Adopted_Status.Adopted_Status1 + " "
-                     + searchResults[i].Room.Room_ID + " " + searchResults[i].Food.Food_Type + " " + searchResults[i].Personality.Color + " "
-                     + searchResults[i].Shot.Shot_Status);
+                Console.WriteLine("["+ optionsCounter.ToString() + "] " + searchResults[i].Animal_Name + "Gender: " + searchResults[i].Gender.Gender1 + "\nAge: " + searchResults[i].Age + "\nSize: " + searchResults[i].Size.Size1 + "\nAdopted Status: " + searchResults[i].Adopted_Status.Adopted_Status1 + "\nRoom: " + searchResults[i].Room.Room_ID + "\nFood type: " + searchResults[i].Food.Food_Type + "\nPersonality Color: " + searchResults[i].Personality.Color + "\nShot Status: " + searchResults[i].Shot.Shot_Status);
                 optionsCounter++;
             }
             for (int j = 1; j <= searchResults.Count; j++)
@@ -294,33 +296,6 @@ namespace HumaneSociety
             userInput = ui.GetUserInput(options);
             ui.ValidateUserInput(options, userInput);
         }
-
-        //void ISqlConnector.OpenSqlConnection()
-        //{
-        //    using (SqlConnection conn = new SqlConnection())
-        //    {
-        //        conn.ConnectionString = "Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;";
-        //        conn.Open();
-        //        //humane.employee.Write(conn);
-        //    }
-        //}
-
-        //void ISqlConnector.CloseSqlConnection(SqlConnection conn)
-        //{
-        //    conn.Close();
-        //}
-
-        //public void Read(SqlConnection conn, string command)
-        //{
-        //    SqlDataReader myReader = null;
-        //    //SqlCommand myCommand = new SqlCommand(commandString, conn);
-        //    SqlCommand myCommand = new SqlCommand(command, conn);        
-        //    myReader = myCommand.ExecuteReader();
-        //    while(myReader.Read())
-        //    { 
-        //         Console.WriteLine(myReader["Size"].ToString());
-        //    }
-        //}
 
         //public void Write(SqlConnection conn, string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor)
         //{
