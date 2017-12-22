@@ -211,7 +211,7 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    userInput = ui.GetShots();
+                    userInput = ui.GetSearchShots();
                     ConductSearch(referenceTable, referenceColumn, userInput);
                     break;
                 case "5":
@@ -231,7 +231,7 @@ namespace HumaneSociety
         }
         private void ConductSearch(string referenceTable, string referenceColumn, string userInput)
         {
-
+            
         }
 
         //void ISqlConnector.OpenSqlConnection()
@@ -249,35 +249,47 @@ namespace HumaneSociety
         //    conn.Close();
         //}
 
-        public void Read(SqlConnection conn, string command)
-        {
-            SqlDataReader myReader = null;
-            //SqlCommand myCommand = new SqlCommand(commandString, conn);
-            SqlCommand myCommand = new SqlCommand(command, conn);        
-            myReader = myCommand.ExecuteReader();
-            while(myReader.Read())
-            { 
-                 Console.WriteLine(myReader["Size"].ToString());
-            }
-        }
+        //public void Read(SqlConnection conn, string command)
+        //{
+        //    SqlDataReader myReader = null;
+        //    //SqlCommand myCommand = new SqlCommand(commandString, conn);
+        //    SqlCommand myCommand = new SqlCommand(command, conn);        
+        //    myReader = myCommand.ExecuteReader();
+        //    while(myReader.Read())
+        //    { 
+        //         Console.WriteLine(myReader["Size"].ToString());
+        //    }
+        //}
 
-        public void Write(SqlConnection conn, string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor)
-        {
-            DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
-            Test objWrite = new Test();
-            objWrite.Animal_Name = animalName;
-            objWrite.Gender = gender;
-            objWrite.Age = age;
-            objWrite.Size = size;
-            objWrite.Adopted = adopted;
-            objWrite.Room = room;
-            objWrite.Food = food;
-            objWrite.Personality_Color = personalityColor;
-            theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite);
-            theHumaneSociety.SubmitChanges();
-            Console.WriteLine("Adding Pet");
-            Console.ReadKey();
+        //public void Write(SqlConnection conn, string animalName, string gender, string age, string size, string adopted, string room, string food, string personalityColor)
+        //{
+        //    DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+        //    Test objWrite = new Test();
+        //    objWrite.Animal_Name = animalName;
+        //    objWrite.Gender = gender;
+        //    objWrite.Age = age;
+        //    objWrite.Size = size;
+        //    objWrite.Adopted = adopted;
+        //    objWrite.Room = room;
+        //    objWrite.Food = food;
+        //    objWrite.Personality_Color = personalityColor;
+        //    theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite);
+        //    theHumaneSociety.SubmitChanges();
+        //    Console.WriteLine("Adding Pet");
+        //    Console.ReadKey();
 
+        //}
+        public void Update()
+        {
+            DataContext theHumanSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+            var query =
+                (from d in theHumanSociety.GetTable<Test_Animal>()
+                 where d.Animal_Name == "Bud"
+                 select d).First();
+
+            query.Animal_Name = "Not Bud";
+            Console.WriteLine(query.Animal_Name);
+            Console.ReadLine();
         }
     }
 }

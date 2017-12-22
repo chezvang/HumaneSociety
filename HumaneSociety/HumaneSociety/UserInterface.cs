@@ -262,10 +262,27 @@ namespace HumaneSociety
         public string GetShots()
         {
             bool isInputValid = false;
+            List<string> options = new List<string>() { "1", "2" };
+            string userInput;
+            Console.Clear();
+            Console.WriteLine("Does this animal have their shots?:");
+            Console.WriteLine("[1] Has Shots \n[2] No Shots");
+            userInput = GetUserInput(options);
+            isInputValid = ValidateUserInput(options, userInput);
+            if (!isInputValid)
+            {
+                IncorrectInput();
+                GetSize();
+            }
+            return userInput;
+        }
+        public string GetSearchShots()
+        {
+            bool isInputValid = false;
             List<string> options = new List<string>() { "1", "2", "3" };
             string userInput;
             Console.Clear();
-            Console.WriteLine("How do you want to search shots?:");
+            Console.WriteLine("Does this animal have their shots?:");
             Console.WriteLine("[1] Has Shots \n[2] No Shots \n[3] All Shots");
             userInput = GetUserInput(options);
             isInputValid = ValidateUserInput(options, userInput);
@@ -292,6 +309,19 @@ namespace HumaneSociety
                 GetSize();
             }
             return userInput;
+        }
+        public bool ConfirmInput()
+        {
+            bool confirm = false;
+
+            Console.WriteLine("\nIs this information correct? [y/n]");
+            string answer = Console.ReadLine();
+            if (answer != "n")
+            {
+                confirm = true;
+                return confirm;
+            }
+            return false;
         }
         //public void DisplayInput()
         //{

@@ -63,6 +63,7 @@ namespace HumaneSociety
             write = ConfirmInput();
             if(write == true)
             {
+                Write(userName, userAge, userGender, userEmail, userPhone, userProfile);
                 //pass all answer variables into write method for SQL databsase
                 AdopterMainMenu();
             }
@@ -183,7 +184,7 @@ namespace HumaneSociety
                     break;
                 case "4":
                     referenceColumn = "Shots";
-                    userInput = ui.GetShots();
+                    userInput = ui.GetSearchShots();
                     //pass referenceColumn to SQL read
                     break;
                 case "5":
@@ -200,6 +201,31 @@ namespace HumaneSociety
                     break;
             }
         }
+        
+        public void AskAdopt()
+        {
+            bool adopt = false;
+            Console.WriteLine("Do you want to adopt this pet?");
+            string option = Console.ReadLine();
+            adopt = ui.ConfirmInput();
+
+        }
+
+        //public void Write(string userName, string userAge, string userGender, string userEmail, string userPhone, string userProfile)
+        //{
+        //    DataContext theHumaneSociety = new DataContext("Data Source=localhost;" + "Initial Catalog=TheHumaneSociety;" + "Integrated Security=SSPI;");
+        //    Test objWrite = new Test(); //change 'Test' to User table name
+        //    objWrite.Name = userName; //change to match table column
+        //    objWrite.Age = userAge; //change to match table column
+        //    objWrite.Gender = userGender; //change to match table column
+        //    objWrite.Email = userEmail; //change to match table column
+        //    objWrite.Phone = userPhone; //change to match table column
+        //    objWrite.Profile = userProfile; //change to match table column
+        //    theHumaneSociety.GetTable<Animals.Dog>().InsertOnSubmit(objWrite); //change to match table name
+        //    theHumaneSociety.SubmitChanges();
+        //    Console.WriteLine("Adding Profile");
+        //    Console.ReadKey();
+        //}
 
         //public void Read(SqlConnection conn)
         //{
