@@ -262,11 +262,11 @@ namespace HumaneSociety
         public string GetShots()
         {
             bool isInputValid = false;
-            List<string> options = new List<string>() { "1", "2", "3" };
+            List<string> options = new List<string>() { "1", "2" };
             string userInput;
             Console.Clear();
             Console.WriteLine("How do you want to search shots?:");
-            Console.WriteLine("[1] Has Shots \n[2] No Shots \n[3] All Shots");
+            Console.WriteLine("[1] Has Shots \n[2] No Shots");
             userInput = GetUserInput(options);
             isInputValid = ValidateUserInput(options, userInput);
             if (!isInputValid)
